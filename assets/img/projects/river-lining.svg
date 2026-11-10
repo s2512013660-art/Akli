@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13264a"/><stop offset="1" stop-color="#2a4675"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f6a9a"/><stop offset="1" stop-color="#1d3560"/></linearGradient>
+    <linearGradient id="conc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cfc4b2"/><stop offset="1" stop-color="#ede4d6"/></linearGradient>
+    <radialGradient id="sun" cx=".8" cy=".2" r=".5"><stop offset="0" stop-color="#e0ad80" stop-opacity=".55"/><stop offset="1" stop-color="#e0ad80" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="640" fill="url(#sky)"/>
+  <rect width="1200" height="640" fill="url(#sun)"/>
+  <circle cx="960" cy="120" r="46" fill="#e0ad80" opacity=".9"/>
+  <!-- palms -->
+  <g fill="#0b1a33" opacity=".85">
+    <path d="M90 300 q6 -80 2 -150 h6 q4 70 -2 150z"/><path d="M95 150 q-60 -10 -80 20 q40 -30 80 -14 q-30 -40 -80 -30 q60 0 80 24 q10 -50 60 -60 q-40 20 -50 56 q50 -30 90 -6 q-50 -10 -100 10z"/>
+    <path d="M1100 300 q6 -70 2 -130 h6 q4 60 -2 130z"/><path d="M1105 170 q-55 -10 -75 18 q38 -28 75 -13 q-28 -36 -74 -28 q56 0 74 22 q9 -46 56 -56 q-38 18 -47 52 q46 -28 84 -6 q-46 -9 -93 11z"/>
+  </g>
+  <rect y="290" width="1200" height="30" fill="#0f2142"/>
+  <!-- channel trapezoid in perspective -->
+  <path d="M0 320 H1200 V640 H0z" fill="#6b5a45"/>
+  <path d="M0 330 L520 300 H680 L1200 330 V640 H0z" fill="url(#conc)"/>
+  <path d="M120 640 L560 304 H640 L1080 640z" fill="url(#water)"/>
+  <!-- joints -->
+  <g stroke="#a99a83" stroke-width="2" opacity=".8">
+    <path d="M0 400 L548 310"/><path d="M0 500 L538 314"/><path d="M60 640 L552 307"/>
+    <path d="M1200 400 L652 310"/><path d="M1200 500 L662 314"/><path d="M1140 640 L648 307"/>
+    <path d="M200 340 L280 330 M80 420 L190 400"/><path d="M1000 340 L920 330 M1120 420 L1010 400"/>
+  </g>
+  <g stroke="#c8895a" stroke-width="4"><path d="M0 330 L520 300"/><path d="M1200 330 L680 300"/></g>
+  <!-- water ripples -->
+  <g stroke="#9fc0e0" stroke-width="2" stroke-linecap="round" opacity=".5" fill="none">
+    <path d="M520 420 q20 -6 40 0 t40 0"/><path d="M460 500 q24 -7 48 0 t48 0 t48 0"/><path d="M600 360 q12 -4 24 0 t24 0"/><path d="M420 590 q30 -8 60 0 t60 0 t60 0 t60 0"/>
+  </g>
+  <rect width="1200" height="640" fill="#071226" opacity=".08"/>
+</svg>

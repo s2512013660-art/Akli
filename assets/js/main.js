@@ -1,5 +1,5 @@
 /* =========================================================
-   بوابة الإعمار – BAWABAT AL-EMAR
+   بوابة الإعمار — BAWABAT AL-EMAR
    ========================================================= */
 (function () {
   "use strict";
@@ -9,44 +9,46 @@
   var WA = "https://wa.me/9647718000711";
   var KEY = "bawabat-lang";
 
-  /* ---------- Translations (Arabic is read from the HTML) ---------- */
+  /* ---------- English copy (Arabic is read from the HTML) ---------- */
   var EN = {
     "brand": "Bawabat Al-Emar",
-    "nav.team": "Our team",
+    "nav.team": "Team",
     "nav.projects": "Projects",
+    "nav.standards": "Standards",
     "nav.contact": "Contact",
-    "hero.kicker": "Bawabat Al-Emar",
-    "hero.title": "Building the future<br>on pillars of trust.",
-    "hero.sub": "Engineering execution and supervision for nearly twenty years.",
-    "hero.cta1": "Our projects",
+    "hero.title": "Built on <em>solid ground</em>.",
+    "hero.sub": "General contracting · Engineering execution & supervision · 20 years",
+    "hero.cta1": "Projects",
     "hero.cta2": "Contact",
-    "stats.years": "years of experience",
-    "stats.sectorsV": "Public & private",
-    "stats.sectors": "sectors served",
+    "stats.years": "years of practice",
+    "stats.sectorsV": "Public · Private",
+    "stats.sectors": "sectors",
     "stats.hqV": "Karbala",
     "stats.hq": "headquarters",
-    "team.title": "Who builds",
-    "team.t1": "Engineers",
-    "team.d1": "Leading the work from the heart of the site.",
+    "team.title": "How we work",
+    "team.t1": "Site engineering",
+    "team.d1": "Engineers on site, true to the drawings.",
     "team.t2": "Execution crews",
-    "team.d2": "Formwork, rebar, pouring and finishing.",
-    "team.t3": "Supervision",
-    "team.d3": "Quality and time controlled through handover.",
-    "projects.title": "Projects we delivered",
+    "team.d2": "Formwork · Rebar · Concrete · Finishing.",
+    "team.t3": "Quality control",
+    "team.d3": "Inspection at every stage, through handover.",
+    "projects.title": "Delivered works",
     "p1.tag": "Water works",
     "p1.title": "Al-Bobiyat River Lining",
-    "p2.tag": "Bridges & roads",
+    "p2.tag": "Bridges",
     "p2.title": "Al-Kamaliya Bridge",
     "p3.tag": "Buildings",
-    "p3.title": "Multi-storey concrete frames",
-    "quote.title": "Quality is built from the foundations.",
-    "quote.text": "Engineered concrete mixes and reinforcing steel to specification.",
-    "contact.title": "Your next project?",
-    "contact.sub": "Let’s discuss it as engineers and deliver it as professionals.",
-    "contact.wa": "Message us on WhatsApp",
+    "p3.title": "Concrete frames",
+    "std.title": "Foundations first.",
+    "std.s1": "Designed mixes",
+    "std.s2": "Rebar to specification",
+    "std.s3": "Controlled schedules",
+    "contact.title": "Start your project.",
+    "contact.sub": "From study to handover.",
+    "contact.wa": "Chat on WhatsApp",
     "contact.loc": "Karbala, Iraq",
-    "footer": "Bawabat Al-Emar General Contracting Co. All rights reserved.",
-    "_title": "Bawabat Al-Emar General Contracting | Karbala, Iraq",
+    "footer": "Bawabat Al-Emar General Contracting",
+    "_title": "Bawabat Al-Emar General Contracting | Karbala",
     "_wa": "Hello Bawabat Al-Emar, I'd like to discuss a project."
   };
   var AR = { "_title": document.title, "_wa": "مرحباً بوابة الإعمار، أرغب بمناقشة مشروع." };
@@ -71,12 +73,10 @@
     document.querySelectorAll("[data-wa]").forEach(function (a) {
       a.href = WA + "?text=" + encodeURIComponent(dict._wa);
     });
-    try { localStorage.setItem(KEY, en ? "en" : "ar"); } catch (e) { /* ignore */ }
-    if (slider) { slider.scrollLeft = 0; updateSlider(); }
+    try { localStorage.setItem(KEY, en ? "en" : "ar"); } catch (e) { /* storage unavailable */ }
+    slider.scrollLeft = 0;
+    updateSlider();
   }
-  document.querySelectorAll("[data-lang-toggle]").forEach(function (b) {
-    b.addEventListener("click", function () { setLang(root.lang === "en" ? "ar" : "en"); });
-  });
 
   /* ---------- Mobile menu ---------- */
   var nav = document.getElementById("nav");
@@ -98,21 +98,24 @@
   var sliderNav = document.querySelector(".slider-nav");
   var prevBtn = document.querySelector('[data-slide="prev"]');
   var nextBtn = document.querySelector('[data-slide="next"]');
+  var bar = document.getElementById("track-bar");
 
-  function step() {
-    var s = slider.querySelector(".slide");
-    return s ? s.getBoundingClientRect().width + 16 : 300;
-  }
   function updateSlider() {
     var max = slider.scrollWidth - slider.clientWidth;
     var pos = Math.abs(slider.scrollLeft);
+    var ratio = max > 0 ? pos / max : 0;
+    var w = Math.min(100, (slider.clientWidth / slider.scrollWidth) * 100);
     sliderNav.classList.toggle("is-static", max < 4);
+    bar.parentNode.style.visibility = max < 4 ? "hidden" : "";
     prevBtn.disabled = pos < 4;
     nextBtn.disabled = pos > max - 4;
+    bar.style.width = w + "%";
+    bar.style.insetInlineStart = ratio * (100 - w) + "%";
   }
   function go(dir) {
-    var rtl = root.dir === "rtl";
-    slider.scrollBy({ left: dir * step() * (rtl ? -1 : 1), behavior: "smooth" });
+    var first = slider.querySelector(".slide");
+    var step = first.getBoundingClientRect().width + 16;
+    slider.scrollBy({ left: dir * step * (root.dir === "rtl" ? -1 : 1), behavior: "smooth" });
   }
   prevBtn.addEventListener("click", function () { go(-1); });
   nextBtn.addEventListener("click", function () { go(1); });
@@ -120,13 +123,14 @@
   window.addEventListener("resize", updateSlider);
 
   /* ---------- Reveal on scroll ---------- */
-  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+  var hasIO = "IntersectionObserver" in window;
+  var io = hasIO ? new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" }) : null;
 
-  document.querySelectorAll(".arches, .stats, .pillars, .hero-text").forEach(function (g) {
+  document.querySelectorAll(".hero-text, .arches, .stats, .pillars").forEach(function (g) {
     g.querySelectorAll(".reveal").forEach(function (el, i) { el.style.setProperty("--d", i * 0.12 + "s"); });
   });
   document.querySelectorAll(".reveal").forEach(function (el) {
@@ -136,49 +140,50 @@
   /* ---------- Counter ---------- */
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var counter = document.querySelector(".counter");
-  if (counter && io && !reduced) {
+  if (counter && hasIO && !reduced) {
     var target = +counter.getAttribute("data-target");
     counter.textContent = "0";
     var cio = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting) return;
       cio.disconnect();
-      var t0 = null;
-      (function tick(ts) {
-        if (!t0) t0 = ts;
-        var p = Math.min((ts - t0) / 1600, 1);
+      var t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / 1600, 1);
         counter.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
         if (p < 1) requestAnimationFrame(tick);
-      })(performance.now());
+      })(t0);
     }, { threshold: 0.6 });
     cio.observe(counter);
   }
 
-  /* ---------- Floating WhatsApp: hide when the contact block is on screen ---------- */
+  /* ---------- Floating WhatsApp hides over the contact block ---------- */
   var wa = document.querySelector(".wa-float");
-  if (io && wa) {
-    var visible = new Set();
+  if (hasIO) {
+    var onScreen = new Set();
     var wio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { en.isIntersecting ? visible.add(en.target) : visible.delete(en.target); });
-      wa.classList.toggle("is-hidden", visible.size > 0);
+      entries.forEach(function (en) { if (en.isIntersecting) onScreen.add(en.target); else onScreen.delete(en.target); });
+      wa.classList.toggle("is-hidden", onScreen.size > 0);
     }, { threshold: 0.15 });
     wio.observe(document.getElementById("contact"));
     wio.observe(document.querySelector(".site-footer"));
-  }
 
-  /* ---------- Active nav link ---------- */
-  if (io) {
+    /* active nav link */
     var links = nav.querySelectorAll("a");
     var sio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === "#" + en.target.id); });
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === "#" + en.target.id); });
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     document.querySelectorAll("main section[id]").forEach(function (s) { sio.observe(s); });
   }
 
   /* ---------- Init ---------- */
+  document.querySelectorAll("[data-lang-toggle]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(root.lang === "en" ? "ar" : "en"); });
+  });
   document.getElementById("year").textContent = new Date().getFullYear();
   var saved = null;
-  try { saved = localStorage.getItem(KEY); } catch (e) { /* ignore */ }
+  try { saved = localStorage.getItem(KEY); } catch (e) { /* storage unavailable */ }
   setLang(saved === "en" ? "en" : "ar");
 })();

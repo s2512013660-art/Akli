@@ -4,19 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>بوابة الإعمار للمقاولات العامة</title>
-  <meta name="description" content="شركة بوابة الإعمار للمقاولات العامة — كربلاء، العراق. تنفيذ مشاريع الأبنية والبنى التحتية منذ أكثر من عشرين عاماً.">
+  <meta name="description" content="بوابة الإعمار للمقاولات العامة — كربلاء، العراق. خبرة ميدانية منذ 2007 في التصميم والتنفيذ والإشراف للقطاعين الحكومي والخاص.">
   <meta name="theme-color" content="#0c2236">
   <meta property="og:type" content="website">
   <meta property="og:title" content="بوابة الإعمار للمقاولات العامة">
-  <meta property="og:description" content="تنفيذ مشاريع الأبنية والبنى التحتية منذ أكثر من عشرين عاماً.">
-  <meta property="og:image" content="assets/img/site/raft-foundation.jpg">
+  <meta property="og:description" content="خبرة تُرى في الموقع — منذ 2007.">
+  <meta property="og:image" content="assets/img/site/site-cranes.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+  <!-- Intro runs only with JavaScript and when the visitor has not asked for reduced motion.
+       The timeout is a safety net: the page always becomes usable, even if main.js fails. -->
+  <script>
+    (function (r) {
+      r.classList.add("js");
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) { r.classList.add("is-ready"); return; }
+      r.classList.add("is-intro");
+      setTimeout(function () { r.classList.remove("is-intro"); r.classList.add("is-ready"); }, 7000);
+    })(document.documentElement);
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/site/raft-foundation-800.webp 800w, assets/img/site/raft-foundation-1920.webp 1920w" imagesizes="100vw">
+  <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" imagesizes="100vw">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -25,6 +37,7 @@
     "@type": "GeneralContractor",
     "name": "بوابة الإعمار للمقاولات العامة",
     "alternateName": "Bawabat Al-Emar General Contracting",
+    "foundingDate": "2007",
     "telephone": "+9647718000711",
     "address": { "@type": "PostalAddress", "addressLocality": "Karbala", "addressCountry": "IQ" },
     "sameAs": ["https://www.instagram.com/bawabat.alemar_/"]
@@ -32,13 +45,20 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
+
+  <!-- Intro: the mark floats, turns, then settles into the header -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-stage">
+      <svg class="intro-mark" id="intro-mark" viewBox="0 0 48 48"><path d="M4 6h40v34h-7V13H11v27H4z"/><path d="M15 17h18v23h-6V23h-6v17h-6z"/><rect class="mark-base" x="2" y="43" width="44" height="4"/></svg>
+      <span class="intro-shadow" id="intro-shadow"></span>
+    </div>
+  </div>
 
   <!-- Header -->
   <header class="header" id="header">
     <div class="container header-row">
-      <a class="brand" href="#top" aria-label="بوابة الإعمار للمقاولات العامة">
-        <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 6h40v34h-7V13H11v27H4z"/><path d="M15 17h18v23h-6V23h-6v17h-6z"/><rect class="mark-base" x="2" y="43" width="44" height="4"/></svg>
+      <a class="brand" href="#hero" aria-label="بوابة الإعمار للمقاولات العامة">
+        <svg class="mark" id="header-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 6h40v34h-7V13H11v27H4z"/><path d="M15 17h18v23h-6V23h-6v17h-6z"/><rect class="mark-base" x="2" y="43" width="44" height="4"/></svg>
         <span class="wordmark">
           <strong data-i18n="brand">بوابة الإعمار</strong>
           <span data-i18n="brand.sub">BAWABAT AL-EMAR</span>
@@ -46,15 +66,14 @@
       </a>
 
       <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
-        <a href="#about" data-i18n="nav.about">عن الشركة</a>
-        <a href="#services" data-i18n="nav.services">مجالات العمل</a>
-        <a href="#projects" data-i18n="nav.projects">المشاريع</a>
-        <a href="#contact" class="nav-contact" data-i18n="nav.contact">اتصل بنا</a>
+        <a href="#about" data-i18n="nav.about">من نحن</a>
+        <a href="#works" data-i18n="nav.works">أعمالنا</a>
+        <a href="#services" data-i18n="nav.services">خدماتنا</a>
+        <a href="#contact" data-i18n="nav.contact">تواصل معنا</a>
       </nav>
 
       <div class="header-tools">
         <button type="button" class="lang" data-lang-toggle lang="en">English</button>
-        <a href="#contact" class="btn btn-primary btn-sm header-cta" data-i18n="nav.contact">اتصل بنا</a>
         <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="القائمة">
           <span></span><span></span>
         </button>
@@ -62,192 +81,146 @@
     </div>
   </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section class="hero" id="top">
-      <picture class="hero-media">
-        <source type="image/webp" srcset="assets/img/site/raft-foundation-800.webp 800w, assets/img/site/raft-foundation-1920.webp 1920w" sizes="100vw">
-        <img src="assets/img/site/raft-foundation.jpg" alt="صب أساس حصيري بمضخات الخرسانة في أحد مواقع الشركة" width="1920" height="1440" fetchpriority="high">
-      </picture>
-      <div class="container hero-content">
-        <h1 data-i18n="hero.title">خبرة عشرين عاماً في تنفيذ الأبنية والبنى التحتية.</h1>
-        <p data-i18n="hero.text">نتولى تنفيذ المشاريع من الأساسات حتى التسليم النهائي، لصالح القطاعين الحكومي والخاص.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-light" data-i18n="hero.cta1">مشاريعنا</a>
-          <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">تواصل معنا</a>
-        </div>
-      </div>
-    </section>
+  <!-- Slide indicator -->
+  <nav class="dots" id="dots" aria-label="الشرائح">
+    <a href="#hero" data-i18n-aria="nav.home" aria-label="الرئيسية"></a>
+    <a href="#about" data-i18n-aria="nav.about" aria-label="من نحن"></a>
+    <a href="#works" data-i18n-aria="nav.works" aria-label="أعمالنا"></a>
+    <a href="#services" data-i18n-aria="nav.services" aria-label="خدماتنا"></a>
+    <a href="#contact" data-i18n-aria="nav.contact" aria-label="تواصل معنا"></a>
+  </nav>
 
-    <!-- About -->
-    <section class="section about" id="about">
-      <div class="container split">
-        <div class="split-text reveal">
-          <h2 data-i18n="about.title">عن الشركة</h2>
-          <p class="lead" data-i18n="about.lead">بوابة الإعمار شركة مقاولات عامة مقرها كربلاء، تعمل في تنفيذ مشاريع الأبنية والبنى التحتية منذ أكثر من عشرين عاماً.</p>
-          <p data-i18n="about.text">تقوم الشركة على إدارة هندسية مباشرة في مواقع العمل، وكوادر تنفيذية متخصصة، ورقابة فنية تغطي مراحل المشروع كافة حتى التسليم النهائي.</p>
-          <dl class="figures">
-            <div><dt dir="ltr">+20</dt><dd data-i18n="fig.years">عاماً من الخبرة</dd></div>
-            <div><dt data-i18n="fig.sectorsV">حكومي وخاص</dt><dd data-i18n="fig.sectors">قطاعات العمل</dd></div>
-            <div><dt data-i18n="fig.hqV">كربلاء</dt><dd data-i18n="fig.hq">المقر الرئيسي</dd></div>
-          </dl>
-        </div>
-        <figure class="split-media reveal">
-          <picture>
-            <source type="image/webp" srcset="assets/img/site/building-crane-800.webp 800w, assets/img/site/building-crane-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 560px">
-            <img src="assets/img/site/building-crane.jpg" alt="مبنى خرساني متعدد الطوابق قيد الإنشاء" width="1280" height="720" loading="lazy" decoding="async">
-          </picture>
-        </figure>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section class="section services" id="services">
-      <div class="container split split-reverse">
-        <div class="split-text reveal">
-          <h2 data-i18n="services.title">مجالات العمل</h2>
-          <ul class="service-list">
-            <li>
-              <h3 data-i18n="s1.title">الأعمال الإنشائية</h3>
-              <p data-i18n="s1.text">الأساسات والهياكل الخرسانية المسلحة، بما يشمل أعمال القوالب والتسليح والصب.</p>
-            </li>
-            <li>
-              <h3 data-i18n="s2.title">البنى التحتية</h3>
-              <p data-i18n="s2.text">الجسور، وأعمال تغليف الأنهر والقنوات المائية.</p>
-            </li>
-            <li>
-              <h3 data-i18n="s3.title">الإنهاء والتسليم</h3>
-              <p data-i18n="s3.text">أعمال التشطيب النهائي، وتسليم المشروع جاهزاً للتشغيل.</p>
-            </li>
-          </ul>
-        </div>
-        <figure class="split-media reveal">
-          <picture>
-            <source type="image/webp" srcset="assets/img/site/aerial-frame-800.webp 800w, assets/img/site/aerial-frame-1080.webp 1080w" sizes="(max-width: 900px) 100vw, 560px">
-            <img src="assets/img/site/aerial-frame.jpg" alt="هيكل خرساني مسلح متعدد الطوابق — منظر جوي" width="1080" height="810" loading="lazy" decoding="async">
-          </picture>
-        </figure>
-      </div>
-    </section>
-
-    <!-- Approach -->
-    <section class="section approach" id="approach">
-      <div class="container">
-        <h2 class="reveal" data-i18n="approach.title">منهجية التنفيذ</h2>
-        <div class="columns">
-          <article class="reveal">
-            <h3 data-i18n="a1.title">الإدارة الهندسية</h3>
-            <p data-i18n="a1.text">يُدار المشروع من الموقع مباشرة بإشراف مهندسين مختصين، بما يضمن المطابقة التامة للمخططات والمواصفات القياسية.</p>
-          </article>
-          <article class="reveal">
-            <h3 data-i18n="a2.title">الكوادر التنفيذية</h3>
-            <p data-i18n="a2.text">فرق متخصصة في النجارة الإنشائية، وحدادة التسليح، وصب الخرسانة، وأعمال الإنهاء.</p>
-          </article>
-          <article class="reveal">
-            <h3 data-i18n="a3.title">الرقابة على الجودة</h3>
-            <p data-i18n="a3.text">متابعة فنية لكل مرحلة من مراحل التنفيذ، وضبط للجودة والجداول الزمنية حتى تسليم المشروع.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quality statement -->
-    <section class="quality">
-      <figure class="quality-media">
+  <main>
+    <!-- 1 · Hero -->
+    <section class="slide hero" id="hero" data-slide>
+      <div class="slide-bg">
         <picture>
-          <source type="image/webp" srcset="assets/img/site/night-pour-800.webp 800w, assets/img/site/night-pour-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw">
-          <img src="assets/img/site/night-pour.jpg" alt="أعمال تسليح وصب خرسانة ليلية في الموقع" width="1200" height="1600" loading="lazy" decoding="async">
+          <source type="image/webp" srcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" sizes="100vw">
+          <img src="assets/img/site/site-cranes.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="1600" height="898" fetchpriority="high">
         </picture>
-      </figure>
-      <div class="quality-text">
-        <div class="reveal">
-          <h2 data-i18n="quality.title">الجودة تبدأ من الأساسات.</h2>
-          <p data-i18n="quality.text">نعدّ الأساسات العنصر الذي يحدد عمر المنشأ وسلامته. لذلك نعتمد في كل مشروع ننفذه نسب خلط مدروسة، وحديد تسليح مطابقاً للمواصفات الهندسية.</p>
+      </div>
+      <div class="container hero-content">
+        <h1 class="anim" data-i18n="hero.title">بوابة الإعمار</h1>
+        <p class="hero-tagline anim" data-i18n="hero.tagline">خبرة تُرى في الموقع</p>
+        <p class="hero-since anim" data-i18n="hero.since">منذ 2007</p>
+      </div>
+      <a class="scroll-cue anim" href="#about" data-i18n-aria="nav.next" aria-label="التالي">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- 2 · About -->
+    <section class="slide about" id="about" data-slide>
+      <div class="slide-bg">
+        <picture>
+          <source type="image/webp" srcset="assets/img/site/site-slab-800.webp 800w, assets/img/site/site-slab-1080.webp 1080w" sizes="100vw">
+          <img src="assets/img/site/site-slab.jpg" alt="" width="1080" height="810" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="container about-content">
+        <h2 class="anim" data-i18n="about.title">خبرة ميدانية منذ 2007</h2>
+        <p class="about-lead anim" data-i18n="about.lead">مقاولات عامة بمعايير دقيقة</p>
+        <ul class="pillars">
+          <li class="anim" data-i18n="about.p1">تصميم</li>
+          <li class="anim" data-i18n="about.p2">تنفيذ</li>
+          <li class="anim" data-i18n="about.p3">إشراف</li>
+        </ul>
+        <p class="about-sectors anim" data-i18n="about.sectors">للقطاعين الحكومي والخاص</p>
+      </div>
+    </section>
+
+    <!-- 3 · Selected sites -->
+    <section class="slide works" id="works" data-slide>
+      <div class="container works-content">
+        <h2 class="anim" data-i18n="works.title">مواقع مختارة</h2>
+        <div class="gallery">
+          <button type="button" class="shot shot-a" data-full="assets/img/site/site-frame-1280.webp">
+            <picture>
+              <source type="image/webp" srcset="assets/img/site/site-frame-800.webp 800w, assets/img/site/site-frame-1280.webp 1280w" sizes="(max-width: 760px) 100vw, 60vw">
+              <img src="assets/img/site/site-frame.jpg" alt="هيكل خرساني متعدد الطوابق قيد الإنشاء" width="1280" height="720" loading="lazy" decoding="async">
+            </picture>
+          </button>
+          <button type="button" class="shot shot-b" data-full="assets/img/site/site-cranes-1600.webp">
+            <picture>
+              <source type="image/webp" srcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" sizes="(max-width: 760px) 50vw, 40vw">
+              <img src="assets/img/site/site-cranes.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="1600" height="898" loading="lazy" decoding="async">
+            </picture>
+          </button>
+          <button type="button" class="shot shot-c" data-full="assets/img/site/site-slab-1080.webp">
+            <picture>
+              <source type="image/webp" srcset="assets/img/site/site-slab-800.webp 800w, assets/img/site/site-slab-1080.webp 1080w" sizes="(max-width: 760px) 50vw, 40vw">
+              <img src="assets/img/site/site-slab.jpg" alt="منظر علوي لتسليح سقف خرساني" width="1080" height="810" loading="lazy" decoding="async">
+            </picture>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="section projects" id="projects">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 data-i18n="projects.title">المشاريع</h2>
-          <p data-i18n="projects.text">مشاريع مختارة نفذتها الشركة في قطاع البنى التحتية.</p>
-        </div>
-        <ul class="project-list reveal">
-          <li>
-            <h3 data-i18n="p1.title">تغليف نهر البوبيات</h3>
-            <span data-i18n="p1.type">بنى تحتية — أعمال مائية</span>
-          </li>
-          <li>
-            <h3 data-i18n="p2.title">تنفيذ جسر الكمالية</h3>
-            <span data-i18n="p2.type">بنى تحتية — جسور</span>
-          </li>
+    <!-- 4 · Services -->
+    <section class="slide services" id="services" data-slide>
+      <div class="container services-content">
+        <h2 class="anim" data-i18n="services.title">خدماتنا</h2>
+        <ul class="service-list">
+          <li class="anim" data-i18n="s1">إنشاء المباني السكنية والتجارية</li>
+          <li class="anim" data-i18n="s2">أعمال البنى التحتية</li>
+          <li class="anim" data-i18n="s3">الأعمال الإنشائية والخرسانية</li>
+          <li class="anim" data-i18n="s4">أعمال الترميم والتأهيل</li>
+          <li class="anim" data-i18n="s5">أعمال التشطيبات والإكساء</li>
+          <li class="anim" data-i18n="s6">التصميم والإشراف الهندسي</li>
+          <li class="anim" data-i18n="s7">تجهيز المواد والمعدات</li>
         </ul>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section contact" id="contact">
-      <div class="container contact-grid">
-        <div class="reveal">
-          <h2 data-i18n="contact.title">اتصل بنا</h2>
-          <p class="lead" data-i18n="contact.text">لمناقشة مشروع أو طلب عرض فني ومالي، يمكنكم التواصل مع إدارة الشركة مباشرة.</p>
-          <div class="contact-actions">
-            <a class="btn btn-primary" href="tel:+9647718000711" data-i18n="contact.call">اتصال مباشر</a>
-            <a class="btn btn-outline" href="https://wa.me/9647718000711" target="_blank" rel="noopener" data-wa data-i18n="contact.wa">مراسلة عبر واتساب</a>
-          </div>
+    <!-- 5 · Contact -->
+    <section class="slide contact" id="contact" data-slide>
+      <div class="container contact-content">
+        <h2 class="anim" data-i18n="contact.title">تواصل معنا</h2>
+        <div class="contact-cards">
+          <a class="card anim" href="tel:+9647718000711">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <span><span class="card-label" data-i18n="contact.phone">الهاتف</span><span class="card-value" dir="ltr">0771 800 0711</span></span>
+          </a>
+          <a class="card anim" href="https://wa.me/9647718000711" target="_blank" rel="noopener" data-wa>
+            <svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+            <span><span class="card-label" data-i18n="contact.wa">واتساب</span><span class="card-value" data-i18n="contact.waV">راسلنا مباشرة</span></span>
+          </a>
+          <a class="card anim" href="#" data-email hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3 6 9 7 9-7"/></svg>
+            <span><span class="card-label" data-i18n="contact.email">البريد الإلكتروني</span><span class="card-value" dir="ltr" data-email-text></span></span>
+          </a>
+          <a class="card anim" href="#" target="_blank" rel="noopener" data-maps>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span><span class="card-label" data-i18n="contact.loc">موقعنا على خرائط Google</span><span class="card-value" data-i18n="contact.locV">كربلاء، العراق</span></span>
+          </a>
         </div>
-        <dl class="contact-details reveal">
-          <div>
-            <dt data-i18n="contact.phone">الهاتف / واتساب</dt>
-            <dd><a href="tel:+9647718000711" dir="ltr">0771 800 0711</a></dd>
-          </div>
-          <div>
-            <dt data-i18n="contact.ig">إنستغرام</dt>
-            <dd><a href="https://www.instagram.com/bawabat.alemar_/" target="_blank" rel="noopener" dir="ltr">@bawabat.alemar_</a></dd>
-          </div>
-          <div>
-            <dt data-i18n="contact.address">العنوان</dt>
-            <dd data-i18n="contact.addressV">كربلاء، العراق</dd>
-          </div>
-        </dl>
+      </div>
+      <div class="container contact-bar">
+        <p>© <span id="year">2026</span> <span data-i18n="contact.rights">شركة بوابة الإعمار للمقاولات العامة</span></p>
+        <a href="https://www.instagram.com/bawabat.alemar_/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9"/></svg>
+        </a>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-top">
-      <div class="footer-brand">
-        <a class="brand brand-light" href="#top" aria-label="بوابة الإعمار للمقاولات العامة">
-          <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 6h40v34h-7V13H11v27H4z"/><path d="M15 17h18v23h-6V23h-6v17h-6z"/><rect class="mark-base" x="2" y="43" width="44" height="4"/></svg>
-          <span class="wordmark">
-            <strong data-i18n="brand">بوابة الإعمار</strong>
-            <span data-i18n="brand.sub">BAWABAT AL-EMAR</span>
-          </span>
-        </a>
-        <p data-i18n="footer.text">مقاولات عامة — أبنية وبنى تحتية. كربلاء، العراق.</p>
-      </div>
-      <nav class="footer-nav" aria-label="روابط">
-        <a href="#about" data-i18n="nav.about">عن الشركة</a>
-        <a href="#services" data-i18n="nav.services">مجالات العمل</a>
-        <a href="#projects" data-i18n="nav.projects">المشاريع</a>
-        <a href="#contact" data-i18n="nav.contact">اتصل بنا</a>
-      </nav>
-      <div class="footer-contact">
-        <a href="tel:+9647718000711" dir="ltr">0771 800 0711</a>
-        <a href="https://www.instagram.com/bawabat.alemar_/" target="_blank" rel="noopener" dir="ltr">@bawabat.alemar_</a>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© <span id="year">2026</span> <span data-i18n="footer.rights">شركة بوابة الإعمار للمقاولات العامة. جميع الحقوق محفوظة.</span></p>
-    </div>
-  </footer>
-
   <a class="wa-float" href="https://wa.me/9647718000711" target="_blank" rel="noopener" aria-label="WhatsApp" data-wa>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
   </a>
+
+  <!-- Full-size photo viewer -->
+  <dialog class="lightbox" id="lightbox" aria-label="صورة">
+    <img src="" alt="">
+    <button type="button" class="lb-btn lb-close" data-lb="close" data-i18n-aria="ui.close" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <button type="button" class="lb-btn lb-prev" data-lb="prev" data-i18n-aria="ui.prev" aria-label="السابق">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+    <button type="button" class="lb-btn lb-next" data-lb="next" data-i18n-aria="ui.next" aria-label="التالي">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+    </button>
+  </dialog>
 
   <script src="assets/js/main.js" defer></script>
 </body>

@@ -16,6 +16,7 @@
 
   var root = document.documentElement;
   var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var isRTL = function () { return root.dir === "rtl"; };
 
   /* ---------- English copy (Arabic is read from the page) ---------- */
   var EN = {
@@ -37,6 +38,16 @@
     "about.p3": "Supervision",
     "about.sectors": "For the public and private sectors",
     "works.title": "Selected sites",
+    "p1": "Al-Kamaliyat Bridge",
+    "p2": "Al-Warith University Hospital",
+    "p3": "Courthouse Building, Karbala Governorate",
+    "p4": "Al-Bobiyat River Lining",
+    "p5": "Sama Karbala Fuel Station",
+    "p6": "Hilla – Karbala Entrance Checkpoint",
+    "p7": "Five Stars Hotel",
+    "p8": "Cookies & More Building",
+    "p9": "Al-Mawakib Square",
+    "p10": "Homeless Shelter Building",
     "services.title": "Our services",
     "s1": "Residential and commercial buildings",
     "s2": "Infrastructure works",
@@ -91,10 +102,9 @@
       a.href = "https://wa.me/" + CONFIG.WHATSAPP + "?text=" + encodeURIComponent(dict._wa);
     });
     try { localStorage.setItem("bawabat-lang", en ? "en" : "ar"); } catch (e) { /* storage unavailable */ }
+    rail.scrollLeft = 0;
+    railState();
   }
-  document.querySelectorAll("[data-lang-toggle]").forEach(function (b) {
-    b.addEventListener("click", function () { setLang(root.lang === "en" ? "ar" : "en"); });
-  });
 
   /* ---------- Contact settings ---------- */
   var mailCard = document.querySelector("[data-email]");
@@ -108,21 +118,23 @@
   /* ---------- Slides ---------- */
   var slides = Array.prototype.slice.call(document.querySelectorAll("[data-slide]"));
   var header = document.getElementById("header");
-  var dotLinks = document.querySelectorAll("#dots a");
+  var dots = document.getElementById("dots");
+  var dotLinks = dots.querySelectorAll("a");
   var navLinks = document.querySelectorAll("#nav a");
   var wa = document.querySelector(".wa-float");
   var hero = document.getElementById("hero");
   var current = slides[0];
   var introDone = false;
+  var heroTextHold = false;   // on first load the hero text waits for the photo to start pulling back
 
-  // Stagger the entrance of each slide's elements
+  // Stagger the entrance of each slide's elements (capped so long lists don't drag)
   slides.forEach(function (s) {
-    s.querySelectorAll(".anim, .shot").forEach(function (el, i) {
-      el.style.setProperty("--d", (0.15 + i * 0.12).toFixed(2) + "s");
+    s.querySelectorAll(".anim").forEach(function (el, i) {
+      el.style.setProperty("--d", (0.15 + Math.min(i, 6) * 0.12).toFixed(2) + "s");
     });
   });
 
-  // The slide that holds the middle of the screen is the current one
+  // The slide holding the middle of the screen is the current one
   function update() {
     var vh = window.innerHeight;
     var mid = vh / 2;
@@ -134,14 +146,15 @@
     slides.forEach(function (s) {
       var r = s.getBoundingClientRect();
       var onScreen = r.bottom > 0 && r.top < vh;
-      if (s === current) s.classList.add("is-active");
-      else if (!onScreen) s.classList.remove("is-active");   // reset only once fully out of view, so it replays next time
+      if (s === current && !(s === hero && heroTextHold)) s.classList.add("is-active");
+      else if (!onScreen) s.classList.remove("is-active");   // reset only once out of view, so it replays next time
     });
     var hash = "#" + current.id;
     dotLinks.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === hash); });
     navLinks.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === hash); });
     header.classList.toggle("is-solid", current !== hero || window.scrollY > 40);
     wa.classList.toggle("is-hidden", current.id === "contact");
+    dots.classList.toggle("is-hidden", current.id === "works");
   }
   var ticking = false;
   function onScroll() {
@@ -150,10 +163,10 @@
     requestAnimationFrame(function () { ticking = false; update(); });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
+  window.addEventListener("resize", function () { onScroll(); railState(); });
 
-  /* ---------- Hero: the photo starts close and slowly pulls back ---------- */
-  function startHero() {
+  /* ---------- Hero: the photo waits zoomed on the building, then returns to normal ---------- */
+  function startHeroZoom() {
     if (reduced || hero.classList.contains("is-zooming") || hero.classList.contains("has-zoomed")) return;
     var img = hero.querySelector(".slide-bg img");
     hero.classList.add("is-zooming");
@@ -177,7 +190,10 @@
     root.classList.remove("is-intro", "is-landing");
     root.classList.add("is-ready");
     if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
-    startHero();
+    if (reduced) { update(); return; }
+    heroTextHold = true;
+    setTimeout(startHeroZoom, 350);                                         // the mark has landed: start pulling back
+    setTimeout(function () { heroTextHold = false; update(); }, 1500);     // then the words arrive
     update();
   }
 
@@ -205,11 +221,7 @@
       { transform: "translate(" + dx + "px, " + dy + "px) perspective(600px) scale(" + s + ") rotateY(360deg)" }
     ], { duration: 1250, easing: "cubic-bezier(.65, 0, .25, 1)", fill: "forwards" });
     shadow.animate([{ opacity: 0.5 }, { opacity: 0 }], { duration: 300, fill: "forwards" });
-    setTimeout(function () {
-      if (cancelled) return;
-      intro.classList.add("is-leaving");   // the navy curtain fades and the photo appears
-      startHero();
-    }, 420);
+    setTimeout(function () { if (!cancelled) intro.classList.add("is-leaving"); }, 420);   // curtain lifts: the photo shows, zoomed on the building
     setTimeout(function () { if (!cancelled) root.classList.add("is-landing"); }, 850);
     flight.finished.then(endIntro, endIntro);
   }
@@ -236,7 +248,7 @@
         { transform: "scaleX(1)", opacity: 0.5 }, { transform: "scaleX(.78)", opacity: 0.28 }, { transform: "scaleX(1)", opacity: 0.5 }
       ], { duration: 1150, easing: "ease-in-out", iterations: Infinity });
 
-      // Float for at least one full cycle and until the hero photo is ready, then finish the current cycle cleanly
+      // Float at least one full cycle and until the hero photo is ready, then finish the current cycle cleanly
       Promise.all([wait(1150), heroReady()]).then(function () {
         if (cancelled) return;
         var it = float.effect.getComputedTiming().currentIteration || 0;
@@ -259,26 +271,94 @@
   document.addEventListener("click", function (e) { if (!e.target.closest(".header")) closeMenu(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
 
-  /* ---------- Photo viewer ---------- */
+  /* ---------- Selected sites: horizontal strip of square cards ---------- */
+  var rail = document.getElementById("rail");
+  var railPrev = document.querySelector('[data-rail="prev"]');
+  var railNext = document.querySelector('[data-rail="next"]');
+
+  function railState() {
+    var max = rail.scrollWidth - rail.clientWidth;
+    var pos = Math.abs(rail.scrollLeft);
+    railPrev.disabled = pos < 4;
+    railNext.disabled = pos > max - 4;
+  }
+  // Distance from a card's start edge to the strip's start line (sign matches scrollBy)
+  function edgeDelta(card) {
+    var r = rail.getBoundingClientRect();
+    var pad = parseFloat(getComputedStyle(rail).paddingInlineStart) || 0;
+    var cr = card.getBoundingClientRect();
+    return isRTL() ? cr.right - (r.right - pad) : cr.left - (r.left + pad);
+  }
+  function nearestIndex() {
+    var best = 0, bestAbs = Infinity;
+    Array.prototype.forEach.call(rail.children, function (c, i) {
+      var a = Math.abs(edgeDelta(c));
+      if (a < bestAbs) { bestAbs = a; best = i; }
+    });
+    return best;
+  }
+  function alignTo(i) {
+    var cards = rail.children;
+    var d = edgeDelta(cards[Math.max(0, Math.min(cards.length - 1, i))]);
+    if (Math.abs(d) > 1) rail.scrollBy({ left: d, behavior: reduced ? "auto" : "smooth" });
+  }
+  function railGo(dir) { alignTo(nearestIndex() + dir); }
+  railPrev.addEventListener("click", function () { railGo(-1); });
+  railNext.addEventListener("click", function () { railGo(1); });
+  rail.addEventListener("scroll", function () { requestAnimationFrame(railState); }, { passive: true });
+
+  // Drag with the mouse (touch screens already swipe natively)
+  var drag = null;
+  var dragged = false;
+  rail.addEventListener("pointerdown", function (e) {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    drag = { x: e.clientX, left: rail.scrollLeft, id: e.pointerId };
+    dragged = false;
+  });
+  rail.addEventListener("pointermove", function (e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x;
+    if (!dragged && Math.abs(dx) > 5) {
+      dragged = true;
+      rail.classList.add("is-dragging");
+      rail.setPointerCapture(drag.id);
+    }
+    if (dragged) rail.scrollLeft = drag.left - dx;
+  });
+  function endDrag() {
+    if (!drag) return;
+    drag = null;
+    if (!dragged) return;
+    rail.classList.remove("is-dragging");
+    alignTo(nearestIndex());
+  }
+  rail.addEventListener("pointerup", endDrag);
+  rail.addEventListener("pointercancel", endDrag);
+  rail.addEventListener("click", function (e) {
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+  }, true);
+
+  /* ---------- Photo viewer: opens any project photo that has been added ---------- */
   var lb = document.getElementById("lightbox");
   var lbImg = lb.querySelector("img");
-  var shots = Array.prototype.slice.call(document.querySelectorAll(".shot"));
+  var photos = [];
   var idx = 0;
   function show(i) {
-    idx = (i + shots.length) % shots.length;
-    var shot = shots[idx];
-    lbImg.src = shot.getAttribute("data-full");
-    lbImg.alt = shot.querySelector("img").alt;
+    idx = (i + photos.length) % photos.length;
+    var img = photos[idx];
+    lbImg.src = img.getAttribute("data-full") || img.currentSrc || img.src;
+    lbImg.alt = img.alt;
     lbImg.style.animation = "none";
     void lbImg.offsetWidth;          // restart the fade-in for each photo
     lbImg.style.animation = "";
   }
-  function step(dir) { show(idx + dir); }
-  shots.forEach(function (b, i) {
-    b.addEventListener("click", function () {
-      show(i);
-      if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
-    });
+  function step(dir) { if (photos.length > 1) show(idx + dir); }
+  rail.addEventListener("click", function (e) {
+    var img = e.target.closest(".project-media img");
+    if (!img) return;
+    photos = Array.prototype.slice.call(rail.querySelectorAll(".project-media img"));
+    show(photos.indexOf(img));
+    if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
   });
   lb.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-lb]");
@@ -290,9 +370,8 @@
     if (e.target === lb) lb.close();
   });
   lb.addEventListener("keydown", function (e) {
-    var rtl = root.dir === "rtl";
-    if (e.key === "ArrowLeft") step(rtl ? 1 : -1);
-    if (e.key === "ArrowRight") step(rtl ? -1 : 1);
+    if (e.key === "ArrowLeft") step(isRTL() ? 1 : -1);
+    if (e.key === "ArrowRight") step(isRTL() ? -1 : 1);
   });
   var touchX = null;
   lb.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
@@ -300,12 +379,13 @@
     if (touchX === null) return;
     var dx = e.changedTouches[0].clientX - touchX;
     touchX = null;
-    if (Math.abs(dx) < 50) return;
-    var rtl = root.dir === "rtl";
-    step((dx > 0) === rtl ? 1 : -1);
+    if (Math.abs(dx) >= 50) step((dx > 0) === isRTL() ? 1 : -1);
   });
 
   /* ---------- Start ---------- */
+  document.querySelectorAll("[data-lang-toggle]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(root.lang === "en" ? "ar" : "en"); });
+  });
   document.getElementById("year").textContent = new Date().getFullYear();
   var saved = null;
   try { saved = localStorage.getItem("bawabat-lang"); } catch (e) { /* storage unavailable */ }

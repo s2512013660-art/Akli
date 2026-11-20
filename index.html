@@ -25,9 +25,7 @@
     })(document.documentElement);
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/alexandria-arabic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" imagesizes="100vw">
   <link rel="stylesheet" href="assets/css/style.css">
 
@@ -129,35 +127,75 @@
       </div>
     </section>
 
-    <!-- 3 · Selected sites -->
+    <!-- 3 · Selected sites
+         Each project is a square card with its name underneath. To add a photo,
+         put an <img src="assets/img/projects/…" alt="…"> inside its .project-media. -->
     <section class="slide works" id="works" data-slide>
-      <div class="container works-content">
-        <h2 class="anim" data-i18n="works.title">مواقع مختارة</h2>
-        <div class="gallery">
-          <button type="button" class="shot shot-a" data-full="assets/img/site/site-frame-1280.webp">
-            <picture>
-              <source type="image/webp" srcset="assets/img/site/site-frame-800.webp 800w, assets/img/site/site-frame-1280.webp 1280w" sizes="(max-width: 760px) 100vw, 60vw">
-              <img src="assets/img/site/site-frame.jpg" alt="هيكل خرساني متعدد الطوابق قيد الإنشاء" width="1280" height="720" loading="lazy" decoding="async">
-            </picture>
-          </button>
-          <button type="button" class="shot shot-b" data-full="assets/img/site/site-cranes-1600.webp">
-            <picture>
-              <source type="image/webp" srcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" sizes="(max-width: 760px) 50vw, 40vw">
-              <img src="assets/img/site/site-cranes.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="1600" height="898" loading="lazy" decoding="async">
-            </picture>
-          </button>
-          <button type="button" class="shot shot-c" data-full="assets/img/site/site-slab-1080.webp">
-            <picture>
-              <source type="image/webp" srcset="assets/img/site/site-slab-800.webp 800w, assets/img/site/site-slab-1080.webp 1080w" sizes="(max-width: 760px) 50vw, 40vw">
-              <img src="assets/img/site/site-slab.jpg" alt="منظر علوي لتسليح سقف خرساني" width="1080" height="810" loading="lazy" decoding="async">
-            </picture>
-          </button>
+      <div class="works-inner">
+        <div class="container works-head">
+          <h2 class="anim" data-i18n="works.title">مواقع مختارة</h2>
+          <div class="rail-nav anim">
+            <button type="button" class="rail-btn" data-rail="prev" data-i18n-aria="ui.prev" aria-label="السابق">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+            <button type="button" class="rail-btn" data-rail="next" data-i18n-aria="ui.next" aria-label="التالي">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+          </div>
         </div>
+        <ul class="rail" id="rail" tabindex="0" data-i18n-aria="works.title" aria-label="مواقع مختارة">
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p1">جسر الكماليات</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p2">مستشفى جامعة الوارث</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p3">مبنى دار القضاء في محافظة كربلاء</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p4">تغليف نهر البوبيات</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p5">محطة وقود سما كربلاء</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p6">سيطرة دخول حلة – كربلاء</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p7">فندق النجوم الخمسة</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p8">مبنى كوكيز آند مور</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p9">ساحة المواكب</h3>
+          </li>
+          <li class="project anim">
+            <div class="project-media"></div>
+            <h3 data-i18n="p10">مبنى إيواء المشردين</h3>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- 4 · Services -->
     <section class="slide services" id="services" data-slide>
+      <div class="slide-bg">
+        <picture>
+          <source type="image/webp" srcset="assets/img/site/site-frame-800.webp 800w, assets/img/site/site-frame-1280.webp 1280w" sizes="100vw">
+          <img src="assets/img/site/site-frame.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        </picture>
+      </div>
       <div class="container services-content">
         <h2 class="anim" data-i18n="services.title">خدماتنا</h2>
         <ul class="service-list">

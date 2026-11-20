@@ -26,7 +26,8 @@
   </script>
 
   <link rel="preload" href="assets/fonts/alexandria-arabic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" imagesizes="100vw">
+  <link rel="preload" as="image" type="image/webp" media="(orientation: portrait)" imagesrcset="assets/img/site/site-cranes-p-1200.webp 1200w, assets/img/site/site-cranes-p-2400.webp 2400w" imagesizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+  <link rel="preload" as="image" type="image/webp" media="(orientation: landscape)" imagesrcset="assets/img/site/site-cranes-1280.webp 1280w, assets/img/site/site-cranes-2048.webp 2048w, assets/img/site/site-cranes-3400.webp 3400w, assets/img/site/site-cranes-4800.webp 4800w" imagesizes="(max-aspect-ratio: 16/9) 178vh, 100vw">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -93,8 +94,9 @@
     <section class="slide hero" id="hero" data-slide>
       <div class="slide-bg">
         <picture>
-          <source type="image/webp" srcset="assets/img/site/site-cranes-800.webp 800w, assets/img/site/site-cranes-1600.webp 1600w" sizes="100vw">
-          <img src="assets/img/site/site-cranes.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="1600" height="898" fetchpriority="high">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/site/site-cranes-p-1200.webp 1200w, assets/img/site/site-cranes-p-2400.webp 2400w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+          <source type="image/webp" srcset="assets/img/site/site-cranes-1280.webp 1280w, assets/img/site/site-cranes-2048.webp 2048w, assets/img/site/site-cranes-3400.webp 3400w, assets/img/site/site-cranes-4800.webp 4800w" sizes="(max-aspect-ratio: 16/9) 178vh, 100vw">
+          <img src="assets/img/site/site-cranes.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="2048" height="1150" fetchpriority="high">
         </picture>
       </div>
       <div class="container hero-content">
@@ -111,8 +113,9 @@
     <section class="slide about" id="about" data-slide>
       <div class="slide-bg">
         <picture>
-          <source type="image/webp" srcset="assets/img/site/site-slab-800.webp 800w, assets/img/site/site-slab-1080.webp 1080w" sizes="100vw">
-          <img src="assets/img/site/site-slab.jpg" alt="" width="1080" height="810" loading="lazy" decoding="async">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/site/site-slab-p-1200.webp 1200w, assets/img/site/site-slab-p-2400.webp 2400w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+          <source type="image/webp" srcset="assets/img/site/site-slab-1280.webp 1280w, assets/img/site/site-slab-2160.webp 2160w, assets/img/site/site-slab-3240.webp 3240w" sizes="(max-aspect-ratio: 4/3) 134vh, 100vw">
+          <img src="assets/img/site/site-slab.jpg" alt="" width="2160" height="1620" loading="lazy" decoding="async">
         </picture>
       </div>
       <div class="container about-content">
@@ -192,8 +195,9 @@
     <section class="slide services" id="services" data-slide>
       <div class="slide-bg">
         <picture>
-          <source type="image/webp" srcset="assets/img/site/site-frame-800.webp 800w, assets/img/site/site-frame-1280.webp 1280w" sizes="100vw">
-          <img src="assets/img/site/site-frame.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/site/site-frame-p-1200.webp 1200w, assets/img/site/site-frame-p-2160.webp 2160w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+          <source type="image/webp" srcset="assets/img/site/site-frame-1280.webp 1280w, assets/img/site/site-frame-2560.webp 2560w" sizes="(max-aspect-ratio: 16/9) 178vh, 100vw">
+          <img src="assets/img/site/site-frame.jpg" alt="" width="2560" height="1440" loading="lazy" decoding="async">
         </picture>
       </div>
       <div class="container services-content">

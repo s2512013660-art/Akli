@@ -37,6 +37,7 @@
     "about.p2": "Construction",
     "about.p3": "Supervision",
     "about.sectors": "For the public and private sectors",
+    "photo.label": "From our sites",
     "works.title": "Selected sites",
     "p1": "Al-Kamaliyat Bridge",
     "p2": "Al-Warith University Hospital",
@@ -353,13 +354,18 @@
     lbImg.style.animation = "";
   }
   function step(dir) { if (photos.length > 1) show(idx + dir); }
+  function openViewer(list, img) {
+    photos = list;
+    lb.classList.toggle("is-single", list.length < 2);
+    show(list.indexOf(img));
+    if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
+  }
   rail.addEventListener("click", function (e) {
     var img = e.target.closest(".project-media img");
-    if (!img) return;
-    photos = Array.prototype.slice.call(rail.querySelectorAll(".project-media img"));
-    show(photos.indexOf(img));
-    if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
+    if (img) openViewer(Array.prototype.slice.call(rail.querySelectorAll(".project-media img")), img);
   });
+  var sitePhoto = document.querySelector(".photo-frame img");
+  if (sitePhoto) sitePhoto.addEventListener("click", function () { openViewer([sitePhoto], sitePhoto); });
   lb.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-lb]");
     if (btn) {

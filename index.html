@@ -84,6 +84,7 @@
   <nav class="dots" id="dots" aria-label="الشرائح">
     <a href="#hero" data-i18n-aria="nav.home" aria-label="الرئيسية"></a>
     <a href="#about" data-i18n-aria="nav.about" aria-label="من نحن"></a>
+    <a href="#site" data-i18n-aria="photo.label" aria-label="من مواقع العمل"></a>
     <a href="#works" data-i18n-aria="nav.works" aria-label="أعمالنا"></a>
     <a href="#services" data-i18n-aria="nav.services" aria-label="خدماتنا"></a>
     <a href="#contact" data-i18n-aria="nav.contact" aria-label="تواصل معنا"></a>
@@ -113,9 +114,9 @@
     <section class="slide about" id="about" data-slide>
       <div class="slide-bg">
         <picture>
-          <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/site/site-slab-p-1200.webp 1200w, assets/img/site/site-slab-p-2400.webp 2400w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
-          <source type="image/webp" srcset="assets/img/site/site-slab-1280.webp 1280w, assets/img/site/site-slab-2160.webp 2160w, assets/img/site/site-slab-3240.webp 3240w" sizes="(max-aspect-ratio: 4/3) 134vh, 100vw">
-          <img src="assets/img/site/site-slab.jpg" alt="" width="2160" height="1620" loading="lazy" decoding="async">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/site/site-night-p-1200.webp 1200w, assets/img/site/site-night-p-2400.webp 2400w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+          <source type="image/webp" srcset="assets/img/site/site-night-1280.webp 1280w, assets/img/site/site-night-2160.webp 2160w, assets/img/site/site-night-3240.webp 3240w" sizes="(max-aspect-ratio: 4/3) 134vh, 100vw">
+          <img src="assets/img/site/site-night.jpg" alt="صب أساس حصيري ليلاً بعدة مضخات خرسانة" width="2160" height="1620" loading="lazy" decoding="async">
         </picture>
       </div>
       <div class="container about-content">
@@ -128,6 +129,19 @@
         </ul>
         <p class="about-sectors anim" data-i18n="about.sectors">للقطاعين الحكومي والخاص</p>
       </div>
+    </section>
+
+    <!-- 2b · Site photo, shown in full -->
+    <section class="slide photo" id="site" data-slide data-i18n-aria="photo.label" aria-label="من مواقع العمل">
+      <div class="photo-backdrop" aria-hidden="true">
+        <img src="assets/img/site/site-slab-blur.webp" alt="" width="640" height="480" loading="lazy" decoding="async">
+      </div>
+      <figure class="photo-frame anim">
+        <picture>
+          <source type="image/webp" srcset="assets/img/site/site-slab-1280.webp 1280w, assets/img/site/site-slab-2160.webp 2160w, assets/img/site/site-slab-3240.webp 3240w" sizes="(min-aspect-ratio: 4/3) 112vh, 100vw">
+          <img src="assets/img/site/site-slab.jpg" alt="منظر علوي لتسليح سقف خرساني واسع في أحد مواقع الشركة" width="2160" height="1620" loading="lazy" decoding="async" data-full="assets/img/site/site-slab-3240.webp">
+        </picture>
+      </figure>
     </section>
 
     <!-- 3 · Selected sites

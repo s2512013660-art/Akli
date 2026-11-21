@@ -22,13 +22,8 @@
   var EN = {
     "brand": "Bawabat Al-Emar",
     "brand.sub": "GENERAL CONTRACTING",
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.works": "Our work",
-    "nav.services": "Services",
-    "nav.contact": "Contact",
     "nav.next": "Next",
-    "hero.title": "Bawabat Al-Emar",
+    "hero.title": "Bawabat Al‑Emar",
     "hero.tagline": "Experience you can see on site",
     "hero.since": "Since 2007",
     "about.title": "Field experience since 2007",
@@ -37,7 +32,6 @@
     "about.p2": "Construction",
     "about.p3": "Supervision",
     "about.sectors": "For the public and private sectors",
-    "photo.label": "From our sites",
     "works.title": "Selected sites",
     "p1": "Al-Kamaliyat Bridge",
     "p2": "Al-Warith University Hospital",
@@ -119,9 +113,6 @@
   /* ---------- Slides ---------- */
   var slides = Array.prototype.slice.call(document.querySelectorAll("[data-slide]"));
   var header = document.getElementById("header");
-  var dots = document.getElementById("dots");
-  var dotLinks = dots.querySelectorAll("a");
-  var navLinks = document.querySelectorAll("#nav a");
   var wa = document.querySelector(".wa-float");
   var hero = document.getElementById("hero");
   var current = slides[0];
@@ -150,12 +141,37 @@
       if (s === current && !(s === hero && heroTextHold)) s.classList.add("is-active");
       else if (!onScreen) s.classList.remove("is-active");   // reset only once out of view, so it replays next time
     });
-    var hash = "#" + current.id;
-    dotLinks.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === hash); });
-    navLinks.forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("href") === hash); });
     header.classList.toggle("is-solid", current !== hero || window.scrollY > 40);
     wa.classList.toggle("is-hidden", current.id === "contact");
-    dots.classList.toggle("is-hidden", current.id === "works");
+    servicesPhotos(services.classList.contains("is-active"));
+  }
+
+  /* ---------- Services background: the frame photo, then the slab photo, alternating ---------- */
+  var services = document.getElementById("services");
+  var layerA = services.querySelector(".bg-a");
+  var layerB = services.querySelector(".bg-b");
+  var cycle = null;
+  var showingB = false;
+  function move(layer) {            // restart the slow zoom on the photo that is coming into view
+    layer.classList.remove("is-moving");
+    void layer.offsetWidth;
+    layer.classList.add("is-moving");
+  }
+  function servicesPhotos(on) {
+    if (on === !!cycle) return;
+    if (!on) {                      // left the slide: stop and go back to the first photo
+      clearInterval(cycle); cycle = null; showingB = false;
+      services.classList.remove("show-b");
+      layerA.classList.remove("is-moving"); layerB.classList.remove("is-moving");
+      return;
+    }
+    if (reduced) { cycle = true; return; }
+    move(layerA);
+    cycle = setInterval(function () {
+      showingB = !showingB;
+      move(showingB ? layerB : layerA);
+      services.classList.toggle("show-b", showingB);
+    }, 5200);
   }
   var ticking = false;
   function onScroll() {
@@ -259,19 +275,6 @@
     }, endIntro);
   }
 
-  /* ---------- Mobile menu ---------- */
-  var nav = document.getElementById("nav");
-  var toggle = document.getElementById("menu-toggle");
-  function closeMenu() { nav.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); }
-  toggle.addEventListener("click", function () {
-    var open = !nav.classList.contains("is-open");
-    nav.classList.toggle("is-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-  nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
-  document.addEventListener("click", function (e) { if (!e.target.closest(".header")) closeMenu(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
-
   /* ---------- Selected sites: horizontal strip of square cards ---------- */
   var rail = document.getElementById("rail");
   var railPrev = document.querySelector('[data-rail="prev"]');
@@ -364,8 +367,6 @@
     var img = e.target.closest(".project-media img");
     if (img) openViewer(Array.prototype.slice.call(rail.querySelectorAll(".project-media img")), img);
   });
-  var sitePhoto = document.querySelector(".photo-frame img");
-  if (sitePhoto) sitePhoto.addEventListener("click", function () { openViewer([sitePhoto], sitePhoto); });
   lb.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-lb]");
     if (btn) {

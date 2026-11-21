@@ -128,10 +128,17 @@ main { position: relative; width: var(--colw); margin-inline: auto; background: 
   position: absolute; inset: -12%; z-index: -2;
   background: var(--navy-3) center / cover no-repeat; filter: blur(22px) saturate(1.15);
 }
+.backdrop-photo {   /* the same photo, filling the screen behind the words (set by main.js once it has loaded) */
+  position: absolute; inset: -2%; z-index: -2; background: center / cover no-repeat;
+  filter: blur(2.5px) saturate(1.05); opacity: 0; transition: opacity 1.2s ease;
+}
+.backdrop-photo.is-loaded { opacity: 1; }
+.services .bp-b.is-loaded { opacity: 0; transition-duration: 1.6s; }
+.services.show-b .bp-b.is-loaded { opacity: 1; }
 .frame {
   position: relative; width: 100%; margin: 0; overflow: hidden;
   background: var(--navy-3) center / cover no-repeat;     /* blurred placeholder while the photo loads */
-  box-shadow: 0 24px 48px -22px rgba(0, 0, 0, .8);
+  box-shadow: 0 24px 48px -18px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .14);
 }
 .frame picture, .frame img { display: block; width: 100%; height: 100%; }
 .frame img { object-fit: cover; }
@@ -145,7 +152,7 @@ main { position: relative; width: var(--colw); margin-inline: auto; background: 
 .js .slide.is-active .anim { opacity: 1; transform: none; }
 
 /* ---------- 1 · Hero ---------- */
-.hero::before { background: linear-gradient(180deg, rgba(8, 26, 43, .88), rgba(8, 26, 43, .8) 50%, rgba(8, 26, 43, .9)); }
+.hero::before { background: linear-gradient(180deg, rgba(8, 26, 43, .78) 0%, rgba(8, 26, 43, .55) 30%, rgba(8, 26, 43, .55) 55%, rgba(8, 26, 43, .86) 100%); }
 .hero .slide-inner { gap: calc(var(--u) * 9); }
 .hero .frame img { transform-origin: 50% 60%; }          /* focus point: the building */
 .js .hero:not(.has-zoomed) .frame img { transform: scale(1.6); }
@@ -153,6 +160,7 @@ main { position: relative; width: var(--colw); margin-inline: auto; background: 
 .hero.has-zoomed .frame img { transform: none; }
 @keyframes hero-zoom { from { transform: scale(1.6); } to { transform: scale(1); } }
 .hero-text { text-align: center; }
+.hero-text, .about-top, .about-bottom, .services h2, .service-list { text-shadow: 0 2px 18px rgba(4, 12, 22, .75), 0 1px 3px rgba(4, 12, 22, .6); }
 .hero h1 { font-size: calc(var(--u) * 12); font-weight: 800; line-height: 1.2; }
 [lang="en"] .hero h1 { font-size: calc(var(--u) * 10); line-height: 1.05; letter-spacing: -.03em; white-space: nowrap; }
 .hero-tagline { margin-top: calc(var(--u) * 2.4); font-size: calc(var(--u) * 5.6); font-weight: 400; line-height: 1.5; color: rgba(255, 255, 255, .92); }
@@ -169,7 +177,7 @@ main { position: relative; width: var(--colw); margin-inline: auto; background: 
 @keyframes cue { 0%, 100% { transform: translateY(0); opacity: .8; } 50% { transform: translateY(7px); opacity: 1; } }
 
 /* ---------- 2 · About (night pour photo) ---------- */
-.about::before { background: rgba(8, 26, 43, .68); }
+.about::before { background: linear-gradient(180deg, rgba(8, 26, 43, .84) 0%, rgba(8, 26, 43, .6) 35%, rgba(8, 26, 43, .6) 65%, rgba(8, 26, 43, .86) 100%); }
 .about .slide-inner { gap: calc(var(--u) * 7); }
 .about-top, .about-bottom { text-align: center; }
 .about h2 { font-size: calc(var(--u) * 8); font-weight: 800; white-space: nowrap; }
@@ -220,9 +228,9 @@ main { position: relative; width: var(--colw); margin-inline: auto; background: 
 .project h3 { margin-top: calc(var(--u) * 3.6); min-height: 3em; font-size: calc(var(--u) * 4.3); font-weight: 500; line-height: 1.5; }
 
 /* ---------- 4 · Services (frame photo, then slab photo — both whole) ---------- */
-.services::before { background: rgba(8, 26, 43, .76); }
+.services::before { background: linear-gradient(180deg, rgba(8, 26, 43, .8) 0%, rgba(8, 26, 43, .66) 30%, rgba(8, 26, 43, .82) 60%, rgba(8, 26, 43, .9) 100%); }
 .services .slide-inner { gap: calc(var(--u) * 5); }
-.band { position: relative; width: 100%; overflow: hidden; background: var(--navy-3); box-shadow: 0 24px 48px -22px rgba(0, 0, 0, .8); }
+.band { position: relative; width: 100%; overflow: hidden; background: var(--navy-3); box-shadow: 0 24px 48px -18px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .14); }
 .bg-layer { position: absolute; inset: 0; overflow: hidden; background-repeat: no-repeat; background-size: 0 0; }
 .bg-layer::before {   /* soft fill around a photo whose shape differs from the band */
   content: ""; position: absolute; inset: -15%; background-image: inherit; background-size: cover; background-position: center;

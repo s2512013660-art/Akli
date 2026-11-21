@@ -275,6 +275,22 @@
     }, endIntro);
   }
 
+  /* ---------- Backgrounds: once a slide photo has loaded, the same file fills the screen behind the words ---------- */
+  function backdropFrom(img, layer) {
+    if (!img || !layer) return;
+    function apply() {
+      var src = img.currentSrc || img.src;
+      if (!src) return;
+      layer.style.backgroundImage = 'url("' + src + '")';
+      layer.classList.add("is-loaded");
+    }
+    if (img.complete && img.naturalWidth) apply(); else img.addEventListener("load", apply, { once: true });
+  }
+  backdropFrom(document.querySelector("#hero .frame img"), document.querySelector("#hero .backdrop-photo"));
+  backdropFrom(document.querySelector("#about .frame img"), document.querySelector("#about .backdrop-photo"));
+  backdropFrom(document.querySelector("#services .bg-a img"), document.querySelector("#services .bp-a"));
+  backdropFrom(document.querySelector("#services .bg-b img"), document.querySelector("#services .bp-b"));
+
   /* ---------- Selected sites: horizontal strip of square cards ---------- */
   var rail = document.getElementById("rail");
   var railPrev = document.querySelector('[data-rail="prev"]');

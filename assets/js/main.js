@@ -185,7 +185,7 @@
   /* ---------- Hero: the photo waits zoomed on the building, then returns to normal ---------- */
   function startHeroZoom() {
     if (reduced || hero.classList.contains("is-zooming") || hero.classList.contains("has-zoomed")) return;
-    var img = hero.querySelector(".slide-bg img");
+    var img = hero.querySelector(".frame img");
     hero.classList.add("is-zooming");
     img.addEventListener("animationend", function () {
       hero.classList.remove("is-zooming");
@@ -217,7 +217,7 @@
   function wait(ms) { return new Promise(function (res) { setTimeout(res, ms); }); }
 
   function heroReady() {
-    var img = hero.querySelector(".slide-bg img");
+    var img = hero.querySelector(".frame img");
     if (img.complete && img.naturalWidth) return Promise.resolve();
     return new Promise(function (res) {
       img.addEventListener("load", res, { once: true });

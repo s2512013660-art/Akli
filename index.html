@@ -26,7 +26,7 @@
   </script>
 
   <link rel="preload" href="assets/fonts/alexandria-arabic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/site/hero-900.avif 900w, assets/img/site/hero-1200.avif 1200w" imagesizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
+  <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/site/hero-800.avif 800w, assets/img/site/hero-1200.avif 1200w" imagesizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -68,43 +68,51 @@
   </header>
 
   <main>
-    <!-- 1 · Hero -->
+    <!-- 1 · Hero: the whole photo, words underneath -->
     <section class="slide hero" id="hero" data-slide>
-      <div class="slide-bg" style="background-image: url(data:image/webp;base64,UklGRvIAAABXRUJQVlA4IOYAAADQBACdASoQACAAPtFUo0uoJKMhsAgBABoJQBYhkSyAEEBrE7e+Ie8opZ3U5kCbMAD+2BvPKPzQiujG3l+6GDTRpXw+FVgfXmLLnuKPaYXnS3qDlC4C/8jPTHv0MMWPgYktNq8fm9cjrlWftm7BRxUFB7WCUcNEorT0tufh1fgCtOnmq2fqp5GwNhc/lE0oWR0tdcKEchtbs6Y+6Gl9EDGZ5EebsjNBimqG/utHMBtf2D+NONfbr7W6ISt2zY28283q3W/IFJ1AdJ24VTbbRcnfTREn7bO6jYs1G50ctpu2Ko0K0D7WAA==)">
-        <picture>
-          <source type="image/avif" srcset="assets/img/site/hero-900.avif 900w, assets/img/site/hero-1200.avif 1200w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <source type="image/webp" srcset="assets/img/site/hero-900.webp 900w, assets/img/site/hero-1200.webp 1200w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <img src="assets/img/site/hero.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="900" height="1800" fetchpriority="high">
-        </picture>
-      </div>
-      <div class="container hero-content">
-        <h1 class="anim" data-i18n="hero.title">بوابة الإعمار</h1>
-        <p class="hero-tagline anim" data-i18n="hero.tagline">خبرة تُرى في الموقع</p>
-        <p class="hero-since anim" data-i18n="hero.since">منذ 2007</p>
+      <div class="backdrop" style="background-image: url(data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBgCdASowABsAPsFYpE0npSOiJWmY8BgJYwCw7At2inrGhwGP2jEEuWkQpygsq5hXFj/03UZFToAA/u1G5lV9HQefO1QwJdZv0LMQYsB5EzIojQcG6MY4S/tAver8qr91riOKvA99eCvk/SfF9k4yTwFoZD5ImD91oORWoGUHWhXeAEsoSvnYgAA=)" aria-hidden="true"></div>
+      <div class="slide-inner">
+        <figure class="frame" style="aspect-ratio: 6400 / 3592; background-image: url(data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBgCdASowABsAPsFYpE0npSOiJWmY8BgJYwCw7At2inrGhwGP2jEEuWkQpygsq5hXFj/03UZFToAA/u1G5lV9HQefO1QwJdZv0LMQYsB5EzIojQcG6MY4S/tAver8qr91riOKvA99eCvk/SfF9k4yTwFoZD5ImD91oORWoGUHWhXeAEsoSvnYgAA=)">
+          <picture>
+            <source type="image/avif" srcset="assets/img/site/hero-800.avif 800w, assets/img/site/hero-1200.avif 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <source type="image/webp" srcset="assets/img/site/hero-800.webp 800w, assets/img/site/hero-1200.webp 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <img src="assets/img/site/hero.jpg" alt="مبنى خرساني قيد الإنشاء مع رافعتين برجيتين" width="1200" height="674" fetchpriority="high">
+          </picture>
+        </figure>
+        <div class="container hero-text">
+          <h1 class="anim" data-i18n="hero.title">بوابة الإعمار</h1>
+          <p class="hero-tagline anim" data-i18n="hero.tagline">خبرة تُرى في الموقع</p>
+          <p class="hero-since anim" data-i18n="hero.since">منذ 2007</p>
+        </div>
       </div>
       <a class="scroll-cue anim" href="#about" data-i18n-aria="nav.next" aria-label="التالي">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
       </a>
     </section>
 
-    <!-- 2 · About -->
+    <!-- 2 · About: words above and below the whole photo -->
     <section class="slide about" id="about" data-slide>
-      <div class="slide-bg">
-        <picture>
-          <source type="image/avif" srcset="assets/img/site/night-900.avif 900w, assets/img/site/night-1200.avif 1200w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <source type="image/webp" srcset="assets/img/site/night-900.webp 900w, assets/img/site/night-1200.webp 1200w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <img src="assets/img/site/night.jpg" alt="صب أساس حصيري ليلاً بعدة مضخات خرسانة" width="900" height="1800" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="container about-content">
-        <h2 class="anim" data-i18n="about.title">خبرة ميدانية منذ 2007</h2>
-        <p class="about-lead anim" data-i18n="about.lead">مقاولات عامة بمعايير دقيقة</p>
-        <ul class="pillars">
-          <li class="anim" data-i18n="about.p1">تصميم</li>
-          <li class="anim" data-i18n="about.p2">تنفيذ</li>
-          <li class="anim" data-i18n="about.p3">إشراف</li>
-        </ul>
-        <p class="about-sectors anim" data-i18n="about.sectors">للقطاعين الحكومي والخاص</p>
+      <div class="backdrop" style="background-image: url(data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBgCdASowACQAPrVMm0qnJKIhtVqqqOAWiWcAy2hNo+vOjzb9beWl3IcmEBQqKbOa5AeGu9ytgqsMRrblAAD++cHP5s34X3h/0mCFc4m2w0OPFAo3O53h465gDHs9TTcnfaU3XrqYJucVXHfxfaRotJahgksEAoalEBTerKXo3VsjKBxEIgLgAAA=)" aria-hidden="true"></div>
+      <div class="slide-inner">
+        <div class="container about-top">
+          <h2 class="anim" data-i18n="about.title">خبرة ميدانية منذ 2007</h2>
+          <p class="about-lead anim" data-i18n="about.lead">مقاولات عامة بمعايير دقيقة</p>
+        </div>
+        <figure class="frame anim" style="aspect-ratio: 10304 / 7728; background-image: url(data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBgCdASowACQAPrVMm0qnJKIhtVqqqOAWiWcAy2hNo+vOjzb9beWl3IcmEBQqKbOa5AeGu9ytgqsMRrblAAD++cHP5s34X3h/0mCFc4m2w0OPFAo3O53h465gDHs9TTcnfaU3XrqYJucVXHfxfaRotJahgksEAoalEBTerKXo3VsjKBxEIgLgAAA=)">
+          <picture>
+            <source type="image/avif" srcset="assets/img/site/night-800.avif 800w, assets/img/site/night-1200.avif 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <source type="image/webp" srcset="assets/img/site/night-800.webp 800w, assets/img/site/night-1200.webp 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <img src="assets/img/site/night.jpg" alt="صب أساس حصيري ليلاً بعدة مضخات خرسانة" width="1200" height="900" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="container about-bottom">
+          <ul class="pillars">
+            <li class="anim" data-i18n="about.p1">تصميم</li>
+            <li class="anim" data-i18n="about.p2">تنفيذ</li>
+            <li class="anim" data-i18n="about.p3">إشراف</li>
+          </ul>
+          <p class="about-sectors anim" data-i18n="about.sectors">للقطاعين الحكومي والخاص</p>
+        </div>
       </div>
     </section>
 
@@ -169,22 +177,28 @@
       </div>
     </section>
 
-    <!-- 4 · Services — background shows the frame photo, then the slab photo, and alternates -->
+    <!-- 4 · Services: the frame photo, then the slab photo (both shown whole), list underneath -->
     <section class="slide services" id="services" data-slide>
-      <div class="slide-bg">
-        <picture class="bg-layer bg-a">
-          <source type="image/avif" srcset="assets/img/site/frame-720.avif 720w, assets/img/site/frame-1080.avif 1080w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <source type="image/webp" srcset="assets/img/site/frame-720.webp 720w, assets/img/site/frame-1080.webp 1080w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <img src="assets/img/site/frame.jpg" alt="" width="720" height="1440" loading="lazy" decoding="async">
-        </picture>
-        <picture class="bg-layer bg-b">
-          <source type="image/avif" srcset="assets/img/site/slab-720.avif 720w, assets/img/site/slab-1080.avif 1080w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <source type="image/webp" srcset="assets/img/site/slab-720.webp 720w, assets/img/site/slab-1080.webp 1080w" sizes="(max-aspect-ratio: 1/2) 50vh, (max-aspect-ratio: 9/16) 100vw, 56.25vh">
-          <img src="assets/img/site/slab.jpg" alt="" width="720" height="1440" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="container services-content">
-        <h2 class="anim" data-i18n="services.title">خدماتنا</h2>
+      <div class="backdrop" style="background-image: url(data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAQBgCdASowABsAPqlIm0qmJKKhurmYAMAVCWcAyNQh1q07TuVrKFxYCgxH47niDCY3cbMSheZMXLgA8KGp3ifrN9drDucsej3W/uMCI8pkzuPSl1O+gNt1pG7IeVG9uZeA/y10FLuPXyKpiJTc/aoAAAA=)" aria-hidden="true"></div>
+      <div class="slide-inner">
+        <div class="container"><h2 class="anim" data-i18n="services.title">خدماتنا</h2></div>
+        <div class="band anim" style="aspect-ratio: 5120 / 2880">
+          <div class="bg-layer bg-a" style="background-image: url(data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAQBgCdASowABsAPqlIm0qmJKKhurmYAMAVCWcAyNQh1q07TuVrKFxYCgxH47niDCY3cbMSheZMXLgA8KGp3ifrN9drDucsej3W/uMCI8pkzuPSl1O+gNt1pG7IeVG9uZeA/y10FLuPXyKpiJTc/aoAAAA=)">
+            <picture>
+            <source type="image/avif" srcset="assets/img/site/frame-800.avif 800w, assets/img/site/frame-1200.avif 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <source type="image/webp" srcset="assets/img/site/frame-800.webp 800w, assets/img/site/frame-1200.webp 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <img src="assets/img/site/frame.jpg" alt="هيكل خرساني متعدد الطوابق قيد الإنشاء" width="1200" height="675" loading="lazy" decoding="async">
+          </picture>
+          </div>
+          <div class="bg-layer bg-b" style="background-image: url(data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAADwBwCdASowACQAPrFKm0qnJKKhuNScAOAWCWMAuzOwUXzGVi7WHZrQiuiQBtW16lvyZAf38gRiHT+s/HywuHSO4jdHsxzN8wAA/h7A3nnYEYrKfruHkPRGpWTIKC6Tsy0x5/BkcGBwamun7UxO+JBPPlTm8lE8llc3w61n1Ca6Wg6usWKvAlN78H9ectxHdy2SQyyTQ3lGh3P5C+XvDa9Wb4a6hmD9KKqVo/Qz7C6Lz6gA)">
+            <picture>
+            <source type="image/avif" srcset="assets/img/site/slab-800.avif 800w, assets/img/site/slab-1200.avif 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <source type="image/webp" srcset="assets/img/site/slab-800.webp 800w, assets/img/site/slab-1200.webp 1200w" sizes="(max-aspect-ratio: 9/16) 100vw, 56.25vh">
+            <img src="assets/img/site/slab.jpg" alt="منظر علوي لتسليح سقف خرساني" width="1200" height="900" loading="lazy" decoding="async">
+          </picture>
+          </div>
+        </div>
+        <div class="container">
         <ul class="service-list">
           <li class="anim" data-i18n="s1">إنشاء المباني السكنية والتجارية</li>
           <li class="anim" data-i18n="s2">أعمال البنى التحتية</li>
@@ -194,6 +208,7 @@
           <li class="anim" data-i18n="s6">التصميم والإشراف الهندسي</li>
           <li class="anim" data-i18n="s7">تجهيز المواد والمعدات</li>
         </ul>
+        </div>
       </div>
     </section>
 

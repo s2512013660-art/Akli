@@ -1,0 +1,281 @@
+<title>One Night, One Raft</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A 10-slide animated 3D presentation: building and night-pouring a 4,500 m² reinforced concrete raft foundation, told through nine English tenses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout concept: a full-bleed 3D site monitor. The scene is the stage; the HUD frames it like a
+     site-control display (stage strip on top, specs left, slide card right, logistics bottom-left). */
+  :root {
+    --night: #0a0f16;          /* deep site-night navy */
+    --panel: rgba(9, 15, 23, 0.80);
+    --panel-2: rgba(16, 25, 37, 0.92);
+    --line: rgba(150, 190, 220, 0.18);
+    --text: #e8eef3;
+    --muted: #93a4b3;
+    --amber: #ffb21a;          /* hi-vis / floodlight amber: the one accent */
+    --cad: #2fd3ff;            /* CAD cyan: focus and drawing lines */
+    --helmet-y: #ffcc00;
+    --helmet-w: #f7f7f4;
+    --f-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --gut: max(16px, env(safe-area-inset-left, 0px));
+    --gut-r: max(16px, env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font-family: var(--f-body); font-size: 14px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  #stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: var(--night); }
+  #vignette {
+    position: fixed; inset: 0; pointer-events: none; opacity: 0; transition: opacity .2s linear;
+    background: rgba(4, 8, 14, 0.5);
+    -webkit-backdrop-filter: blur(1.8px) saturate(0.7); backdrop-filter: blur(1.8px) saturate(0.7);
+    -webkit-mask-image: radial-gradient(ellipse var(--rx, 300px) var(--ry, 200px) at var(--fx, 50%) var(--fy, 50%), transparent 52%, #000 100%);
+    mask-image: radial-gradient(ellipse var(--rx, 300px) var(--ry, 200px) at var(--fx, 50%) var(--fy, 50%), transparent 52%, #000 100%);
+  }
+  #callouts { position: fixed; inset: 0; pointer-events: none; }
+  #callouts svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .co { position: absolute; left: 0; top: 0; transform: translate(-9999px, 0); padding: 6px 10px 7px; border-left: 2px solid var(--cad);
+        background: rgba(6, 14, 24, 0.84); border-radius: 0 6px 6px 0; white-space: nowrap; transition: opacity .25s; opacity: 0; }
+  .co b { display: block; font: 600 12px/1.15 var(--f-mono); letter-spacing: .08em; color: #dff7ff; }
+  .co span { display: block; font: 400 11px/1.3 var(--f-body); color: var(--muted); }
+  .co.big { border-left-color: var(--amber); padding: 8px 12px 9px; }
+  .co.big b { font: 700 19px/1.05 var(--f-display); letter-spacing: .04em; color: #fff; }
+  .co.big b em { font-style: normal; color: var(--amber); }
+
+  /* ---------- HUD frame ---------- */
+  .hud { position: fixed; inset: 0; pointer-events: none; padding-left: var(--gut); padding-right: var(--gut-r); padding-block: max(14px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); grid-template-rows: auto 1fr auto; gap: 14px; transition: opacity .3s; }
+  .hud > * { pointer-events: auto; }
+  body.clean .hud, body.clean #callouts, body.clean #vignette { opacity: 0 !important; pointer-events: none; }
+  body.clean .hud > * { pointer-events: none; }
+  .glass { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+
+  .top { grid-column: 1 / -1; display: flex; gap: 14px; align-items: stretch; min-width: 0; }
+  .brand { padding: 10px 14px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .brand h1 { margin: 0; font: 700 22px/1 var(--f-display); letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
+  .brand h1 i { font-style: normal; color: var(--amber); }
+  .brand p { margin: 3px 0 0; font: 400 11px/1.3 var(--f-mono); color: var(--muted); letter-spacing: .04em; white-space: nowrap; }
+  .stages { flex: 1; min-width: 0; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+  .stages-head { display: flex; justify-content: space-between; gap: 10px; font: 500 11px/1 var(--f-mono); letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+  .stages-head b { color: var(--text); font-weight: 600; }
+  .stage-row { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+  .stage-btn { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 2px 0; }
+  .stage-btn i { display: block; height: 4px; border-radius: 2px; background: rgba(150, 190, 220, .18); transition: background .3s; }
+  .stage-btn span { font: 500 10.5px/1.1 var(--f-mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .02em; }
+  .stage-btn.done i { background: rgba(255, 178, 26, .55); }
+  .stage-btn.on i { background: var(--amber); box-shadow: 0 0 10px rgba(255, 178, 26, .6); }
+  .stage-btn.on span { color: var(--text); }
+  .stage-btn.pend i { background: repeating-linear-gradient(90deg, var(--amber) 0 6px, transparent 6px 10px); }
+  .stage-btn:focus-visible { outline: 2px solid var(--cad); outline-offset: 2px; border-radius: 3px; }
+
+  .left { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; gap: 12px; align-self: start; width: min(260px, 100%); }
+  .spec { padding: 10px 12px; display: grid; grid-template-columns: auto 1fr; gap: 5px 12px; font: 400 12px/1.25 var(--f-mono); }
+  .spec dt { color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-size: 10.5px; align-self: center; }
+  .spec dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .spec .sep { grid-column: 1 / -1; height: 1px; background: var(--line); margin: 3px 0; }
+  .phase b { color: var(--amber); font-weight: 600; }
+  .legend { padding: 9px 12px; display: grid; gap: 6px; font: 400 11.5px/1.2 var(--f-body); color: var(--muted); }
+  .legend div { display: flex; align-items: center; gap: 8px; }
+  .hat { width: 14px; height: 8px; border-radius: 8px 8px 2px 2px; display: inline-block; box-shadow: 0 1px 0 rgba(0,0,0,.5); }
+
+  .card { grid-column: 2; grid-row: 2 / 4; align-self: end; padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 12px; max-height: calc(100% - 4px); overflow: auto; min-width: 0; }
+  .card.swap { animation: cardIn .55s cubic-bezier(.2, .7, .2, 1); }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .kicker { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 500 11px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+  .kicker span:first-child { white-space: nowrap; }
+  .kicker span:last-child { text-align: right; line-height: 1.3; }
+  .card h2 { margin: 0; font: 700 31px/1.02 var(--f-display); letter-spacing: .01em; text-wrap: balance; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid color-mix(in srgb, var(--tc) 55%, transparent); font: 600 12px/1 var(--f-body); color: var(--text); }
+  .chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--tc); box-shadow: 0 0 8px var(--tc); }
+  .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .card li { position: relative; padding-left: 16px; font: 400 14px/1.4 var(--f-body); color: #d6e0e8; }
+  .card li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 2px; background: var(--amber); }
+  .ex { display: grid; gap: 8px; }
+  .ex q { display: block; quotes: none; padding: 10px 12px; border-radius: 8px; background: rgba(255,255,255,.045); border: 1px solid var(--line); font: 400 14.5px/1.45 var(--f-body); color: #eef3f7; }
+  .verb { color: var(--tc); font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--tc) 45%, transparent); text-underline-offset: 3px; }
+  .why { font: 400 12.5px/1.45 var(--f-body); color: var(--muted); }
+  .why b { color: var(--text); font-weight: 600; }
+
+  .bottom { grid-column: 1; grid-row: 3; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; min-width: 0; }
+  .logi { padding: 10px 12px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; width: min(640px, 100%); }
+  .logi[hidden] { display: none !important; }
+  .tile { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .tile svg { width: 22px; height: 22px; color: var(--amber); }
+  .tile b { font: 700 30px/1 var(--f-display); font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+  .tile span { font: 500 10.5px/1.2 var(--f-mono); color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+  .pour { padding: 10px 12px; width: min(640px, 100%); display: grid; gap: 8px; font: 400 12px/1.2 var(--f-mono); }
+  .pour[hidden] { display: none !important; }
+  .pour-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .pour-row span { color: var(--muted); letter-spacing: .05em; text-transform: uppercase; font-size: 10.5px; }
+  .pour-row b { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .bar { height: 6px; border-radius: 3px; background: rgba(150,190,220,.16); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, #8a8f95, #d3d8dc); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; }
+  .btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px; border-radius: 7px; font: 500 12.5px/1 var(--f-body); color: var(--text); background: rgba(255,255,255,.06); border: 1px solid transparent; transition: background .15s, border-color .15s; }
+  .btn:hover { background: rgba(255,255,255,.12); }
+  .btn:focus-visible { outline: 2px solid var(--cad); outline-offset: 2px; }
+  .btn.primary { background: var(--amber); color: #1a1205; font-weight: 600; }
+  .btn.primary:hover { background: #ffc54d; }
+  .btn[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+  .btn svg { width: 16px; height: 16px; }
+  .btn kbd { font: 500 10px/1 var(--f-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 2px 4px; }
+  .restore { position: fixed; right: var(--gut-r); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 5; display: none; }
+  body.clean .restore { display: inline-flex; opacity: .35; }
+  body.clean .restore:hover { opacity: 1; }
+
+  /* ---------- drawers ---------- */
+  .drawer { position: fixed; left: var(--gut); right: var(--gut-r); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 10; max-height: min(62vh, 640px); display: flex; flex-direction: column; background: #0f1823; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .drawer[hidden] { display: none !important; }
+  .drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .drawer-head h3 { margin: 0; font: 700 20px/1 var(--f-display); letter-spacing: .03em; text-transform: uppercase; }
+  .drawer-head h3 small { font: 500 11px/1 var(--f-mono); color: var(--muted); letter-spacing: .08em; margin-left: 10px; }
+  .drawer-body { overflow: auto; padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+  .col h4 { margin: 0 0 10px; font: 600 11px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+  .tense-box { border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; margin-bottom: 12px; color: var(--muted); }
+  .tense-box h5 { margin: 0; font: 700 18px/1 var(--f-display); color: var(--tc); letter-spacing: .02em; }
+  .form { display: grid; grid-template-columns: 16px 1fr; gap: 3px 6px; font: 400 12px/1.4 var(--f-mono); color: #cfd9e1; }
+  .form b { color: var(--tc); }
+  .tense-box p { margin: 0; font: 400 13px/1.5 var(--f-body); color: #d6e0e8; }
+  .script { font: 400 16px/1.75 var(--f-body); color: #e9eff4; max-width: 68ch; }
+  .script .pause { color: var(--amber); font-weight: 600; margin: 0 2px; opacity: .85; }
+  .script .pause.long { letter-spacing: -.1em; }
+  .script .chunk.speaking { background: rgba(255,178,26,.16); border-radius: 4px; box-shadow: 0 0 0 3px rgba(255,178,26,.16); }
+  .meta-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; font: 500 11px/1 var(--f-mono); color: var(--muted); }
+  .meta-line span { border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; }
+  .voice dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font: 400 13px/1.45 var(--f-body); }
+  .voice dt { font: 500 10.5px/1.6 var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+  .voice dd { margin: 0; color: #dbe4ea; }
+  .row-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .toast { font: 500 12px/1.3 var(--f-mono); color: var(--amber); min-height: 16px; margin-top: 8px; }
+  .gram-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .gram-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 7px; align-content: start; color: var(--muted); }
+  .gram-card h5 { margin: 0; display: flex; justify-content: space-between; gap: 8px; font: 700 18px/1 var(--f-display); color: var(--tc); letter-spacing: .02em; }
+  .gram-card h5 small { font: 500 10.5px/1.2 var(--f-mono); color: var(--muted); letter-spacing: .06em; }
+  .gram-card p { margin: 0; font: 400 13px/1.45 var(--f-body); color: #d6e0e8; }
+  .gram-card .sig { font: 400 11.5px/1.4 var(--f-mono); color: var(--muted); }
+  .gram-link { color: var(--amber); font: 500 12.5px/1 var(--f-body); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1100px) {
+    .hud { grid-template-columns: minmax(0, 1fr) minmax(280px, 340px); }
+    .card h2 { font-size: 27px; }
+    .legend { display: none; }
+  }
+  @media (max-width: 860px) {
+    .hud { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; gap: 10px; }
+    .brand p, .left, .stage-btn span { display: none; }
+    .brand h1 { font-size: 18px; }
+    .card { grid-column: 1; grid-row: 3; max-height: 38vh; padding: 12px 14px; gap: 9px; }
+    .card h2 { font-size: 23px; }
+    .card li { font-size: 13px; }
+    .ex q { font-size: 13.5px; padding: 8px 10px; }
+    .why { display: none; }
+    .bottom { grid-column: 1; grid-row: 2; align-self: start; }
+    .logi { grid-template-columns: repeat(5, minmax(56px, 1fr)); gap: 6px; padding: 8px; }
+    .tile b { font-size: 22px; } .tile svg { display: none; } .tile span { font-size: 9px; }
+    .pour { display: none !important; }
+    .controls { grid-column: 1; grid-row: 4; justify-self: stretch; justify-content: center; }
+    .btn .lbl, .btn kbd { display: none; }
+    .drawer-body { grid-template-columns: minmax(0, 1fr); }
+    .gram-body { grid-template-columns: minmax(0, 1fr); }
+    .co span { display: none; }
+    #vignette { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (max-width: 860px) {
+    .top { flex-direction: column; gap: 8px; }
+    .brand { padding: 8px 12px; }
+    #tenseHead { display: none; }
+    .bottom { display: contents; }
+    .logi { grid-column: 1; grid-row: 2; align-self: start; }
+    .controls { grid-column: 1; grid-row: 4; }
+  }
+  @media (max-width: 560px) { .brand { display: none; } .stages { padding: 8px; } }
+  @media (prefers-reduced-motion: reduce) { .card.swap { animation: none; } #vignette { transition: none; } }
+</style>
+
+<canvas id="stage" aria-label="Animated 3D scene of the raft foundation construction"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+<div id="callouts" aria-hidden="true"><svg id="leaders"></svg></div>
+
+<div class="hud" id="hud">
+  <header class="top">
+    <div class="brand glass">
+      <h1>One Night, <i>One Raft</i></h1>
+      <p>RC raft foundation · nine English tenses</p>
+    </div>
+    <nav class="stages glass" aria-label="Slides">
+      <div class="stages-head"><span>Stage <b id="stageNum">01</b> / 10 · <span id="stageName">Overview</span></span><span id="tenseHead"></span></div>
+      <div class="stage-row" id="stageRow"></div>
+    </nav>
+  </header>
+
+  <aside class="left">
+    <dl class="spec glass" aria-label="Raft specification">
+      <dt>Area</dt><dd>4,500 m²</dd>
+      <dt>Thickness</dt><dd>1.00 m</dd>
+      <dt>Volume</dt><dd>≈ 4,500 m³</dd>
+      <dt>Cover</dt><dd>75 mm</dd>
+      <div class="sep"></div>
+      <dt>Phase</dt><dd class="phase" id="phase"><b>Design</b></dd>
+      <dt>Time</dt><dd id="clock">Week 0</dd>
+    </dl>
+    <div class="legend glass" aria-label="Helmet legend">
+      <div><i class="hat" style="background:var(--helmet-y)"></i>Workers · yellow helmets</div>
+      <div><i class="hat" style="background:var(--helmet-w)"></i>Engineers · white helmets</div>
+      <div><i class="hat" style="background:var(--cad);height:3px;border-radius:2px"></i>Current focus zone</div>
+    </div>
+  </aside>
+
+  <article class="card glass" id="card" aria-live="polite"></article>
+
+  <div class="bottom">
+    <section class="logi glass" id="logi" hidden aria-label="Pour logistics">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 21V8l3-3 3 3v13M13 21V11h6v10M3 21h18M8 9v3"/></svg><b data-n="6">6</b><span>Batching plants</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 16V9h9v7M11 12h5l3 3v1M2 16h19"/><ellipse cx="7" cy="9" rx="4" ry="2.5" transform="rotate(-12 7 9)"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><b data-n="75">75</b><span>Mixer trucks</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17h10v-3H3zM6 14l5-8 7 3 3 6M21 15v4"/><circle cx="5" cy="19" r="1.6"/><circle cx="11" cy="19" r="1.6"/></svg><b data-n="11">11</b><span>Concrete pumps</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 15a8 8 0 0 1 16 0zM2 15h20M12 7v3" fill="rgba(255,204,0,.35)"/></svg><b data-n="60" data-p="~">~60</b><span>Workers</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color:#f7f7f4"><path d="M4 15a8 8 0 0 1 16 0zM2 15h20M12 7v3" fill="rgba(255,255,255,.3)"/></svg><b data-n="7">7</b><span>Engineers</span></div>
+    </section>
+    <section class="pour glass" id="pour" hidden aria-label="Pour progress">
+      <div class="pour-row"><span>Poured</span><b id="pourVal">0 / 4,500 m³</b></div>
+      <div class="bar"><i id="pourBar"></i></div>
+      <div class="pour-row"><span>Clock</span><b id="pourClock">20:00</b><span>Elapsed</span><b id="pourEl">0 h 00 min</b><span>Rate</span><b>≈ 380 m³/h</b></div>
+    </section>
+    <div class="controls glass" role="toolbar" aria-label="Presentation controls">
+      <button class="btn" id="prev" title="Previous slide (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg><span class="lbl">Prev</span></button>
+      <button class="btn primary" id="next" title="Next slide (→ or Space)"><span class="lbl">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="btn" id="auto" aria-pressed="false" title="Auto-play, timed to the script (A)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span class="lbl">Auto</span><kbd>A</kbd></button>
+      <button class="btn" id="notesBtn" aria-pressed="false" title="Speaker notes and script (N)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg><span class="lbl">Script</span><kbd>N</kbd></button>
+      <button class="btn" id="gramBtn" aria-pressed="false" title="Nine-tense reference (G)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h7v14H4zM13 5h7v14h-7z"/></svg><span class="lbl">Tenses</span><kbd>G</kbd></button>
+      <button class="btn" id="cleanBtn" title="Hide the HUD for clean screen recording (H)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/></svg><span class="lbl">Clean view</span><kbd>H</kbd></button>
+      <button class="btn" id="fsBtn" title="Fullscreen (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="lbl">Full</span></button>
+    </div>
+  </div>
+</div>
+<button class="btn restore" id="restore" title="Show the HUD (H)">Show HUD</button>
+
+<section class="drawer" id="notes" hidden aria-label="Speaker notes">
+  <div class="drawer-head"><h3>Speaker notes <small id="notesSlide">Slide 1</small></h3><button class="btn" id="notesClose">Close</button></div>
+  <div class="drawer-body">
+    <div class="col" id="notesTense"></div>
+    <div class="col"><h4>Spoken script</h4><div class="meta-line" id="notesMeta"></div><div class="script" id="notesScript"></div>
+      <div class="row-btns"><button class="btn" id="rehearse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Rehearse with browser voice</span></button></div>
+    </div>
+    <div class="col voice" id="notesVoice"></div>
+  </div>
+</section>
+
+<section class="drawer" id="grammar" hidden aria-label="Nine tenses reference">
+  <div class="drawer-head"><h3>Nine tenses <small>quick reference</small></h3><div style="display:flex;gap:10px;align-items:center"><a class="gram-link" href="grammar.html">Full grammar reference for the professor →</a><button class="btn" id="gramClose">Close</button></div></div>
+  <div class="drawer-body"><div class="gram-body" id="gramBody" style="grid-column:1/-1"></div></div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/content.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/app.js"></script>

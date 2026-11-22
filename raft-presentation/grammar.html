@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One Raft, Nine Tenses</title>
+<meta name="description" content="Grammar reference for the presentation One Night, One Raft: how and why each of the nine English tenses is used.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout concept: a single reading column, one numbered section per tense (the numbering is the
+     course's own 1-9 order), each with a form table, a timeline, and evidence quoted from the script. */
+  :root {
+    --bg: #f5f7f9; --surface: #ffffff; --ink: #15202b; --muted: #5a6875; --line: #d8e0e7;
+    --accent: #a86a00; --code-bg: #eef2f5;
+    --f-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --mix: black; --mixp: 38%;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0d141c; --surface: #121c27; --ink: #e6edf3; --muted: #93a4b3; --line: #243241; --accent: #ffb21a; --code-bg: #182432; --mix: white; --mixp: 0%; color-scheme: dark; } }
+  :root[data-theme="dark"] { --bg: #0d141c; --surface: #121c27; --ink: #e6edf3; --muted: #93a4b3; --line: #243241; --accent: #ffb21a; --code-bg: #182432; --mix: white; --mixp: 0%; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px; }
+  .tc { color: color-mix(in srgb, var(--tc) calc(100% - var(--mixp)), var(--mix)); }
+  header.top { display: grid; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font: 700 clamp(36px, 6vw, 56px)/1 var(--f-display); letter-spacing: .01em; text-wrap: balance; }
+  .lede { margin: 0; max-width: 66ch; color: var(--muted); font-size: 17px; }
+  .back { font: 500 14px/1 var(--f-body); color: var(--accent); }
+  h2 { margin: 48px 0 14px; font: 700 30px/1.1 var(--f-display); letter-spacing: .01em; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 500 11.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--code-bg); }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; font-family: var(--f-mono); color: var(--muted); width: 56px; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--tc); margin-right: 7px; vertical-align: 1px; }
+  .verb { font-weight: 600; color: color-mix(in srgb, var(--tc) calc(100% - var(--mixp)), var(--mix)); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--tc) 50%, transparent); text-underline-offset: 3px; }
+  section.tense { margin-top: 40px; padding: 22px 22px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; border-top: 4px solid var(--tc); display: grid; gap: 16px; }
+  .tense-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+  .tense-head h3 { margin: 0; font: 700 30px/1 var(--f-display); letter-spacing: .01em; }
+  .tense-head h3 span { font-family: var(--f-mono); font-size: 16px; color: var(--muted); margin-right: 10px; font-weight: 500; }
+  .slides { font: 500 12px/1 var(--f-mono); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+  .grid2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; }
+  .grid2 > * { min-width: 0; }
+  .form-table td:first-child { width: 44px; font: 600 15px/1.4 var(--f-mono); color: var(--muted); }
+  .form-table td code { font: 400 13.5px/1.5 var(--f-mono); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+  .form-table .ex { color: var(--muted); font-size: 14px; }
+  h4 { margin: 0 0 6px; font: 500 11.5px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  ul.plain { margin: 0; padding-left: 18px; }
+  ul.plain li { margin: 3px 0; }
+  .why { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--code-bg); }
+  .signals { display: flex; flex-wrap: wrap; gap: 6px; }
+  .signals span { font: 400 13px/1 var(--f-mono); padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; }
+  blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--tc); background: var(--code-bg); border-radius: 0 8px 8px 0; font-size: 15.5px; }
+  .evidence { display: grid; gap: 8px; }
+  .evidence p { margin: 0; font-size: 15px; }
+  .evidence small { font: 500 11px/1 var(--f-mono); color: var(--muted); margin-right: 8px; letter-spacing: .06em; }
+  .timeline { color: var(--muted); max-width: 320px; }
+  .mistakes td:nth-child(1) s { color: var(--muted); }
+  .mistakes td:nth-child(2) { font-weight: 500; }
+  .pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .pair { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .pair h3 { margin: 0 0 6px; font: 700 20px/1.1 var(--f-display); }
+  .pair p { margin: 6px 0 0; font-size: 15px; }
+  footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 720px) { .grid2, .pairs { grid-template-columns: minmax(0, 1fr); } section.tense { padding: 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Grammar reference · University English presentation</div>
+    <h1>One Raft, Nine Tenses</h1>
+    <p class="lede">This reference supports the 10-slide presentation <em>One Night, One Raft</em>, which follows the construction and night pour of a 4,500 m² reinforced concrete raft foundation. Each section explains one tense: how it is formed, when it is used, why it fits that part of the story, and where it appears in the spoken script.</p>
+    <a class="back" href="index.html">← Back to the 3D presentation</a>
+  </header>
+
+  <h2>How the tenses follow the story</h2>
+  <div class="table-wrap"><table id="map"><thead><tr><th>Slide</th><th>Construction stage</th><th>Tense(s)</th><th>Why this tense here</th></tr></thead><tbody></tbody></table></div>
+
+  <div id="tenses"></div>
+
+  <h2>Pairs that students often confuse</h2>
+  <div class="pairs" id="pairs"></div>
+
+  <footer>Colour code: each tense keeps the same colour in the slides, the speaker notes and this page. Highlighted verbs in the evidence are taken directly from the spoken script.</footer>
+</div>
+<script src="js/content.js"></script>
+<script>
+(function () {
+  const C = window.RAFT_CONTENT, TN = C.TENSES, esc = C.esc;
+  // slide map
+  document.querySelector('#map tbody').innerHTML = C.SLIDES.map(s =>
+    '<tr><td class="num">' + String(s.n).padStart(2, '0') + '</td><td>' + esc(s.zone) + '</td><td>' +
+    s.tenses.map(k => '<div style="--tc:' + TN[k].color + '"><span class="dot"></span>' + TN[k].name + '</div>').join('') +
+    '</td><td>' + s.tenses.map(k => esc(s.explain[k])).join(' ') + '</td></tr>').join('');
+  // evidence: script sentences containing verbs of each tense
+  function sentences(text) {
+    return text.replace(/ \/\/ /g, ' ').replace(/ \/ /g, ' ').split(/(?<=[.?!])\s+(?=[A-Z"{])/);
+  }
+  const evidence = {};
+  C.SLIDES.forEach(s => sentences(s.script).forEach(sen => {
+    C.verbsIn(sen).forEach(([k]) => { (evidence[k] = evidence[k] || []); if (!evidence[k].some(e => e.sen === sen)) evidence[k].push({ n: s.n, sen }); });
+  }));
+  document.getElementById('tenses').innerHTML = '<h2>The nine tenses</h2>' + C.TENSE_ORDER.map(k => {
+    const t = TN[k];
+    const ev = (evidence[k] || []).slice(0, 6).map(e => '<p><small>SLIDE ' + e.n + '</small>' + C.markupToHTML(e.sen.replace(/\{(\w+):([^}]+)\}/g, (m, kk, v) => kk === k ? m : v)) + '</p>').join('');
+    return '<section class="tense" style="--tc:' + t.color + '" id="t-' + k + '">' +
+      '<div class="tense-head"><h3 class="tc"><span>' + t.n + '</span>' + t.name + '</h3><div class="slides">Used in slide' + (t.slides.length > 1 ? 's ' : ' ') + t.slides.join(', ') + '</div></div>' +
+      '<div class="grid2"><div><h4>Form</h4><div class="table-wrap"><table class="form-table"><tbody>' +
+      '<tr><td>+</td><td><code>' + esc(t.form.pos) + '</code><div class="ex">' + esc(t.formEx.pos) + '</div></td></tr>' +
+      '<tr><td>−</td><td><code>' + esc(t.form.neg) + '</code><div class="ex">' + esc(t.formEx.neg) + '</div></td></tr>' +
+      '<tr><td>?</td><td><code>' + esc(t.form.q) + '</code><div class="ex">' + esc(t.formEx.q) + '</div></td></tr>' +
+      '</tbody></table></div></div>' +
+      '<div><h4>When we use it</h4><ul class="plain">' + t.use.map(u => '<li>' + esc(u) + '</li>').join('') + '</ul>' +
+      '<div class="timeline" aria-hidden="true">' + C.timelineSVG(t.timeline, t.color) + '</div></div></div>' +
+      '<div><h4>Why it fits this part of the presentation</h4><p class="why">' + esc(t.why) + '</p></div>' +
+      '<div><h4>Context example</h4><blockquote>' + C.markupToHTML(t.example) + '</blockquote></div>' +
+      '<div class="evidence"><h4>Where it appears in the spoken script</h4>' + ev + '</div>' +
+      '<div><h4>Signal words</h4><div class="signals">' + t.signals.map(s => '<span>' + esc(s) + '</span>').join('') + '</div></div>' +
+      '<div><h4>Common mistakes</h4><div class="table-wrap"><table class="mistakes"><thead><tr><th>Incorrect</th><th>Correct</th><th>Rule</th></tr></thead><tbody>' +
+      t.mistakes.map(([a, b, r]) => '<tr><td><s>' + esc(a) + '</s></td><td>' + esc(b) + '</td><td>' + esc(r) + '</td></tr>').join('') +
+      '</tbody></table></div></div></section>';
+  }).join('');
+  const pairs = [
+    ['Past Simple vs Present Perfect', 'PAS', 'PRF', 'The crew laid the mesh <b>last week</b> (finished time, Past Simple).', 'We have coordinated 75 trucks <b>for tonight</b> (result now, no finished time, Present Perfect).'],
+    ['Past Simple vs Past Continuous', 'PAS', 'PAC', 'An engineer <b>noticed</b> a gap (short, complete event).', 'while they <b>were checking</b> the third row (longer background action).'],
+    ['Past Perfect vs Past Perfect Continuous', 'PPF', 'PPFC', 'The crew <b>had finished</b> both meshes (the completed result).', 'They <b>had been fixing</b> steel for three weeks (the long effort).'],
+    ['Present Perfect vs Present Perfect Continuous', 'PRF', 'PRFC', 'The engineers <b>have signed</b> the checklist (done; the result matters).', 'The crews <b>have been vibrating</b> for ten hours (still going; duration matters).'],
+    ['Present Simple vs Present Continuous', 'PRS', 'PRC', 'A raft <b>distributes</b> loads evenly (always true).', 'The pumps <b>are pushing</b> concrete (happening right now).'],
+    ['will vs going to', 'FUT', 'FUT', 'The lab <b>is going to crush</b> the cubes on day 7 (already planned).', 'The columns <b>will rise</b> from these bars (prediction, expected outcome).']
+  ];
+  document.getElementById('pairs').innerHTML = pairs.map(([h, a, b, x, y]) =>
+    '<div class="pair"><h3>' + h + '</h3><p style="--tc:' + TN[a].color + '"><span class="dot"></span>' + x + '</p><p style="--tc:' + TN[b].color + '"><span class="dot"></span>' + y + '</p></div>').join('');
+})();
+</script>
+</body>
+</html>

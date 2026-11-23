@@ -42,7 +42,11 @@ def pic_item(sh, tag):
     im = im.crop((round(W * l), round(H * t), round(W * (1 - r)), round(H * (1 - b))))
     if im.width > 2600: im = im.resize((2600, round(im.height * 2600 / im.width)), Image.LANCZOS)
     fn = f"img/{tag}.webp"; im.save(os.path.join(OUT, "web", fn), "WEBP", quality=88, method=6)
-    return {"kind": "image", "o": {"x": E(sh.left), "y": E(sh.top), "w": E(sh.width), "h": E(sh.height), "src": fn, "objectName": sh.name}}
+    o = {"x": E(sh.left), "y": E(sh.top), "w": E(sh.width), "h": E(sh.height), "src": fn, "objectName": sh.name}
+    am = sh._element.find(".//" + A + "alphaModFix")
+    if am is not None:
+        o["transparency"] = 100 - int(am.get("amt", "100000")) / 1000
+    return {"kind": "image", "o": o}
 
 def items_of(shapes, tag):
     out = []

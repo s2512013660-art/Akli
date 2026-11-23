@@ -1,0 +1,527 @@
+[
+ {
+  "slide": 1,
+  "transition": {
+   "type": "fade",
+   "dur": 1000
+  },
+  "effects": [
+   {
+    "t": 0.2,
+    "eff": "fade",
+    "dur": 0.7,
+    "targets": [
+     "kicker"
+    ]
+   },
+   {
+    "t": 0.4,
+    "eff": "floatUp",
+    "dur": 1.0,
+    "targets": [
+     "!!Title"
+    ]
+   },
+   {
+    "t": 1.2,
+    "eff": "wipeL",
+    "dur": 0.7,
+    "targets": [
+     "!!Rule"
+    ]
+   },
+   {
+    "t": 1.4,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "tagline"
+    ]
+   },
+   {
+    "t": 1.9,
+    "eff": "fade",
+    "dur": 0.8,
+    "targets": [
+     "footer"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 2,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 3,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 4,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 5,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 6,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 7,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 8,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 9,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   }
+  ]
+ },
+ {
+  "slide": 10,
+  "transition": {
+   "type": "morph",
+   "dur": 1400
+  },
+  "effects": [
+   {
+    "t": 0.0,
+    "eff": "breathe",
+    "dur": 12,
+    "targets": [
+     "!!Photo"
+    ],
+    "opts": {
+     "scale": 104
+    }
+   },
+   {
+    "t": 0.35,
+    "eff": "floatUp",
+    "dur": 0.8,
+    "targets": [
+     "expl"
+    ]
+   },
+   {
+    "t": 0.8,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "form"
+    ]
+   },
+   {
+    "t": 1.05,
+    "eff": "floatUp",
+    "dur": 0.7,
+    "targets": [
+     "use"
+    ]
+   },
+   {
+    "t": 1.35,
+    "eff": "floatUp",
+    "dur": 0.9,
+    "targets": [
+     "ex"
+    ]
+   },
+   {
+    "t": 2.2,
+    "eff": "fade",
+    "dur": 0.8,
+    "targets": [
+     "thanks"
+    ]
+   }
+  ]
+ }
+]

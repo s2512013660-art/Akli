@@ -83,14 +83,6 @@
     ]
    },
    {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
-    ]
-   },
-   {
     "t": 0.45,
     "eff": "floatUp",
     "dur": 0.9,
@@ -188,14 +180,6 @@
     "dur": 0.5,
     "targets": [
      "rule"
-    ]
-   },
-   {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
     ]
    },
    {
@@ -299,14 +283,6 @@
     ]
    },
    {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
-    ]
-   },
-   {
     "t": 0.45,
     "eff": "floatUp",
     "dur": 0.9,
@@ -404,14 +380,6 @@
     "dur": 0.5,
     "targets": [
      "rule"
-    ]
-   },
-   {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
     ]
    },
    {
@@ -515,14 +483,6 @@
     ]
    },
    {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
-    ]
-   },
-   {
     "t": 0.45,
     "eff": "floatUp",
     "dur": 0.9,
@@ -620,14 +580,6 @@
     "dur": 0.5,
     "targets": [
      "rule"
-    ]
-   },
-   {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
     ]
    },
    {
@@ -731,14 +683,6 @@
     ]
    },
    {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
-    ]
-   },
-   {
     "t": 0.45,
     "eff": "floatUp",
     "dur": 0.9,
@@ -839,14 +783,6 @@
     ]
    },
    {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
-    ]
-   },
-   {
     "t": 0.45,
     "eff": "floatUp",
     "dur": 0.9,
@@ -944,14 +880,6 @@
     "dur": 0.5,
     "targets": [
      "rule"
-    ]
-   },
-   {
-    "t": 0.25,
-    "eff": "fade",
-    "dur": 0.6,
-    "targets": [
-     "label"
     ]
    },
    {

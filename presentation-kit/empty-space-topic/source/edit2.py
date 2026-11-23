@@ -159,15 +159,15 @@ for idx, slide in enumerate(prs.slides, 1):
         if side == "T":
             top = (pic.top + pic.height) / 914400 + 0.3
             lx, lw, rx, rw = 0.85, 5.75, 7.0, 5.6
-            place(rule, lx, top, 1.1, 0.01); place(lab, lx, top + 0.11, lw, 0.26)
-            place(t, lx, top + 0.45, lw, 0.95); place(para, lx, top + 1.5, lw, 1.6)
+            place(rule, lx, top, 1.1, 0.01)
+            place(t, lx, top + 0.22, lw, 0.95); place(para, lx, top + 1.3, lw, 1.7)
             py, prx, prw, qy = top + 0.05, rx, rw, top + 2.05
         else:
             x, w = COL[idx]
-            place(rule, x, 0.55, 1.1, 0.01); place(lab, x, 0.66, w, 0.26)
-            place(t, x, 1.02, w, 1.3); place(para, x, 2.38, w, 1.58)
+            place(rule, x, 0.6, 1.1, 0.01)
+            place(t, x, 0.85, w, 1.3); place(para, x, 2.3, w, 1.66)
             py, prx, prw, qy = 4.24, x, w, 6.2
-        set_text(lab, [d["tag"]], BODY, 11.5, C_ACC, bold=True, spc=200)
+        lab._element.getparent().remove(lab._element)
         set_text(t, [d["title"]], HEAD, 28, C_TITLE)
         set_text(para, [d["para"]], BODY, 13.5, C_BODY, line=1.12)
         pnames = []
@@ -182,7 +182,6 @@ for idx, slide in enumerate(prs.slides, 1):
         slide_in = "slideFromR" if side == "R" else "slideFromL"
         eff = [{"t": 0.0, "eff": "breathe", "dur": 12, "targets": ["!!Photo"], "opts": {"scale": 104}},
                {"t": 0.15, "eff": "wipeL", "dur": 0.5, "targets": ["rule"]},
-               {"t": 0.25, "eff": "fade", "dur": 0.6, "targets": ["label"]},
                {"t": 0.45, "eff": "floatUp", "dur": 0.9, "targets": ["title"]},
                {"t": 0.95, "eff": "floatUp", "dur": 0.8, "targets": ["para"]}]
         for k, (dn, pn) in enumerate(pnames):

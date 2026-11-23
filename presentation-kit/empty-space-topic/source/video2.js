@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
-const FPS = 25, HOLD = [7, 8, 8.5, 8, 7.5, 8, 8.5, 9];
+const FPS = 25, HOLD = [7.5, 8, 8, 8, 8, 8, 8, 9];
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });

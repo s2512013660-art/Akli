@@ -43,6 +43,11 @@ def pic_item(sh, tag):
     if im.width > 2600: im = im.resize((2600, round(im.height * 2600 / im.width)), Image.LANCZOS)
     fn = f"img/{tag}.webp"; im.save(os.path.join(OUT, "web", fn), "WEBP", quality=88, method=6)
     o = {"x": E(sh.left), "y": E(sh.top), "w": E(sh.width), "h": E(sh.height), "src": fn, "objectName": sh.name}
+    cg = sh._element.find(".//" + A + "custGeom")
+    if cg is not None:
+        pth = cg.find(".//" + A + "path"); pw, ph = int(pth.get("w")), int(pth.get("h"))
+        pts = [(int(p.get("x")) / pw * 100, int(p.get("y")) / ph * 100) for p in pth.iter(A + "pt")]
+        o["clip"] = "polygon(" + ", ".join(f"{x:.3f}% {y:.3f}%" for x, y in pts) + ")"
     am = sh._element.find(".//" + A + "alphaModFix")
     if am is not None:
         o["transparency"] = 100 - int(am.get("amt", "100000")) / 1000
@@ -53,6 +58,9 @@ def items_of(shapes, tag):
     for k, sh in enumerate(shapes):
         if sh.shape_type == MSO_SHAPE_TYPE.PICTURE:
             out.append(pic_item(sh, f"{tag}_{k}")); continue
+        if sh.shape_type == MSO_SHAPE_TYPE.GROUP:
+            out.append({"kind": "group", "o": {"x": E(sh.left), "y": E(sh.top), "w": E(sh.width), "h": E(sh.height), "objectName": sh.name},
+                        "items": items_of(sh.shapes, f"{tag}_{k}g")}); continue
         spPr = sh._element.find(qn("p:spPr"))
         geo = spPr.find(A + "prstGeom") if spPr is not None else None
         prst = geo.get("prst") if geo is not None else "rect"
@@ -75,11 +83,15 @@ def items_of(shapes, tag):
             out.append({"kind": "text", "t": runs, "o": o}); continue
         if spPr is None: continue
         o["fill"] = fill_of(spPr); o["line"] = line_of(spPr)
+        if sh.rotation: o["rotate"] = sh.rotation
+        if prst == "parallelogram":
+            av = geo.find(A + "avLst"); gd = av.find(A + "gd") if av is not None else None
+            o["adj"] = int(gd.get("fmla").split()[-1]) / 100000 if gd is not None else 0.25
         if prst == "roundRect":
             av = geo.find(A + "avLst"); gd = av.find(A + "gd") if av is not None else None
             adj = int(gd.get("fmla").split()[-1]) / 100000 if gd is not None else 0.16667
             o["rectRadius"] = adj * min(o["w"], o["h"])
-        out.append({"kind": "shape", "type": {"roundRect": "roundRect", "ellipse": "ellipse", "diamond": "diamond"}.get(prst, "rect"), "o": o})
+        out.append({"kind": "shape", "type": {"roundRect": "roundRect", "ellipse": "ellipse", "diamond": "diamond", "parallelogram": "parallelogram"}.get(prst, "rect"), "o": o})
     return out
 
 slides = []
